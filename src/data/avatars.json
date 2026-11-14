@@ -1,0 +1,128 @@
+[
+  {
+    "id": "female_light_orange",
+    "bodyType": "female",
+    "skinTone": "light",
+    "suitColor": "orange",
+    "src": "/media/avatars/female_light_orange.png"
+  },
+  {
+    "id": "female_light_blue",
+    "bodyType": "female",
+    "skinTone": "light",
+    "suitColor": "blue",
+    "src": "/media/avatars/female_light_blue.png"
+  },
+  {
+    "id": "female_light_red",
+    "bodyType": "female",
+    "skinTone": "light",
+    "suitColor": "red",
+    "src": "/media/avatars/female_light_red.png"
+  },
+  {
+    "id": "female_medium_orange",
+    "bodyType": "female",
+    "skinTone": "medium",
+    "suitColor": "orange",
+    "src": "/media/avatars/female_medium_orange.png"
+  },
+  {
+    "id": "female_medium_blue",
+    "bodyType": "female",
+    "skinTone": "medium",
+    "suitColor": "blue",
+    "src": "/media/avatars/female_medium_blue.png"
+  },
+  {
+    "id": "female_medium_red",
+    "bodyType": "female",
+    "skinTone": "medium",
+    "suitColor": "red",
+    "src": "/media/avatars/female_medium_red.png"
+  },
+  {
+    "id": "female_dark_orange",
+    "bodyType": "female",
+    "skinTone": "dark",
+    "suitColor": "orange",
+    "src": "/media/avatars/female_dark_orange.png"
+  },
+  {
+    "id": "female_dark_blue",
+    "bodyType": "female",
+    "skinTone": "dark",
+    "suitColor": "blue",
+    "src": "/media/avatars/female_dark_blue.png"
+  },
+  {
+    "id": "female_dark_red",
+    "bodyType": "female",
+    "skinTone": "dark",
+    "suitColor": "red",
+    "src": "/media/avatars/female_dark_red.png"
+  },
+  {
+    "id": "male_light_orange",
+    "bodyType": "male",
+    "skinTone": "light",
+    "suitColor": "orange",
+    "src": "/media/avatars/male_light_orange.png"
+  },
+  {
+    "id": "male_light_blue",
+    "bodyType": "male",
+    "skinTone": "light",
+    "suitColor": "blue",
+    "src": "/media/avatars/male_light_blue.png"
+  },
+  {
+    "id": "male_light_red",
+    "bodyType": "male",
+    "skinTone": "light",
+    "suitColor": "red",
+    "src": "/media/avatars/male_light_red.png"
+  },
+  {
+    "id": "male_medium_orange",
+    "bodyType": "male",
+    "skinTone": "medium",
+    "suitColor": "orange",
+    "src": "/media/avatars/male_medium_orange.png"
+  },
+  {
+    "id": "male_medium_blue",
+    "bodyType": "male",
+    "skinTone": "medium",
+    "suitColor": "blue",
+    "src": "/media/avatars/male_medium_blue.png"
+  },
+  {
+    "id": "male_medium_red",
+    "bodyType": "male",
+    "skinTone": "medium",
+    "suitColor": "red",
+    "src": "/media/avatars/male_medium_red.png"
+  },
+  {
+    "id": "male_dark_orange",
+    "bodyType": "male",
+    "skinTone": "dark",
+    "suitColor": "orange",
+    "src": "/media/avatars/male_dark_orange.png"
+  },
+  {
+    "id": "male_dark_blue",
+    "bodyType": "male",
+    "skinTone": "dark",
+    "suitColor": "blue",
+    "src": "/media/avatars/male_dark_blue.png"
+  },
+  {
+    "id": "male_dark_red",
+    "bodyType": "male",
+    "skinTone": "dark",
+    "suitColor": "red",
+    "src": "/media/avatars/male_dark_red.png"
+  }
+]
