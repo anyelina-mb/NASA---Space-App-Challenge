@@ -1,0 +1,27 @@
+{
+  "expressions": {
+    "happy": "laika_happy.png",
+    "thinking": "laika_thinking.png",
+    "yellow": "laika_alert.png",
+    "red": "laika_worried.png",
+    "celebrating": "laika_celebrate.png",
+    "sleeping": "laika_sleepy.png"
+  },
+  "screens": {
+    "welcome": "laika_welcome.png",
+    "guide": "laika_guide.png",
+    "launch": "laika_launch.png",
+    "mars": "laika_mars.png",
+    "bodyScan": "laika_scan.png",
+    "missionComplete": "laika_celebrate.png",
+    "exercise": "laika_exercise.png",
+    "reportToEarth": "laika_report.png",
+    "rest": "laika_sleepy.png"
+  },
+  "turnaround": {
+    "front": "laika_happy.png",
+    "side": "laika_side.png",
+    "back": "laika_back.png"
+  },
+  "baseUrl": "/media/laika/"
+}
