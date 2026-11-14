@@ -1,0 +1,59 @@
+{
+  "_note": "Stage weights are our design model (Low=1, Medium=2, High=3) based on the stage descriptions in our research doc. They are NOT NASA probabilities. 'grows' adds +1 after the middle of that stage. 'transitionBoost' sets weight 3 in the months right after a gravity change.",
+  "transitionMonths": [1, 2, 9, 10, 28, 29, 36],
+  "risks": [
+    {
+      "id": "vestibular",
+      "name": "Balance and motion sickness",
+      "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/",
+      "weights": { "first": 3, "journey": 1, "mars": 1, "return": 1, "earth": 3 },
+      "transitionBoost": true,
+      "severity": 1
+    },
+    {
+      "id": "sans",
+      "name": "Eye and brain changes (SANS)",
+      "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/",
+      "weights": { "first": 2, "journey": 2, "mars": 2, "return": 3, "earth": 2 },
+      "grows": ["journey"],
+      "severity": 3
+    },
+    {
+      "id": "musculoskeletal",
+      "name": "Bone and muscle loss",
+      "source": "https://www.nasa.gov/reference/risk-of-spaceflight-induced-bone-changes/",
+      "weights": { "first": 1, "journey": 2, "mars": 2, "return": 3, "earth": 3 },
+      "grows": ["journey"],
+      "severity": 2
+    },
+    {
+      "id": "cardio",
+      "name": "Heart and blood pressure",
+      "source": "https://www.nasa.gov/reference/risk-of-cardiovascular-adaptations/",
+      "weights": { "first": 2, "journey": 2, "mars": 2, "return": 2, "earth": 3 },
+      "severity": 3
+    },
+    {
+      "id": "sleep",
+      "name": "Sleep and body clock",
+      "source": "https://www.nasa.gov/reference/risk-from-inadequate-sleep-and-irregular-schedules/",
+      "weights": { "first": 3, "journey": 2, "mars": 2, "return": 2, "earth": 2 },
+      "severity": 1
+    },
+    {
+      "id": "behavioral",
+      "name": "Mind and isolation",
+      "source": "https://www.nasa.gov/reference/risk-of-behavioral-conditions-and-psychiatric-disorders/",
+      "weights": { "first": 1, "journey": 2, "mars": 3, "return": 2, "earth": 2 },
+      "grows": ["journey"],
+      "severity": 2
+    },
+    {
+      "id": "immune",
+      "name": "Immune response",
+      "source": "https://www.nasa.gov/reference/risk-of-altered-immune-system-responses/",
+      "weights": { "first": 2, "journey": 2, "mars": 2, "return": 2, "earth": 2 },
+      "severity": 2
+    }
+  ]
+}

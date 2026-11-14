@@ -1,0 +1,134 @@
+{
+  "_note": "Example records only. Fill the rest following the Symptom Data Guide. 'risks' feed the heap ranking; the tree root asks 'topCause', which the engine answers with the top risk from the heap.",
+  "symptoms": [
+    {
+      "id": "chest-pain",
+      "label": "Chest pain, fainting or shortness of breath",
+      "areas": ["chest"],
+      "redFlag": true,
+      "risks": ["cardio"],
+      "questions": [],
+      "tree": null
+    },
+    {
+      "id": "headache",
+      "label": "Headache or trouble concentrating",
+      "areas": ["head"],
+      "redFlag": false,
+      "risks": ["vestibular", "sans", "sleep"],
+      "questions": ["vision", "sudden", "severity", "onset"],
+      "tree": {
+        "id": "headache-root",
+        "question": { "id": "topCause", "text": "Most likely cause for this mission month" },
+        "answers": {
+          "vestibular": {
+            "id": "headache-adapting",
+            "leaf": {
+              "color": "green",
+              "title": "Your body is adapting",
+              "cause": "NASA notes dizziness and coordination problems while the body adjusts to a change in gravity.",
+              "action": "Rest, move slowly and re-check next month.",
+              "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/"
+            }
+          },
+          "sleep": {
+            "id": "headache-sleep",
+            "leaf": {
+              "color": "yellow",
+              "title": "Sleep loss may be involved",
+              "cause": "NASA lists chronic sleep loss and irregular body clocks as a spaceflight risk.",
+              "action": "Protect your sleep schedule tonight and log how you slept.",
+              "source": "https://www.nasa.gov/reference/risk-from-inadequate-sleep-and-irregular-schedules/"
+            }
+          },
+          "sans": {
+            "id": "headache-vision",
+            "question": { "id": "vision", "text": "Is your vision different (blurry, hard to focus)?" },
+            "answers": {
+              "Yes": {
+                "id": "headache-vision-sudden",
+                "question": { "id": "sudden", "text": "Did it start suddenly or little by little?" },
+                "answers": {
+                  "Suddenly": {
+                    "id": "headache-sudden-vision",
+                    "leaf": {
+                      "color": "red",
+                      "title": "Sudden vision change",
+                      "cause": "Sudden vision changes need an immediate medical evaluation. NASA tracks eye and brain changes in space.",
+                      "action": "Stop precise tasks, tell the crew and contact the flight surgeons now.",
+                      "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/"
+                    }
+                  },
+                  "Gradually": {
+                    "id": "headache-sans",
+                    "leaf": {
+                      "color": "yellow",
+                      "title": "Possible eye and brain change (SANS)",
+                      "cause": "NASA reports that the structure of the eyes and brain can change with spaceflight.",
+                      "action": "Tell the crew and include it in your next report to Earth.",
+                      "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/"
+                    }
+                  }
+                }
+              },
+              "No": {
+                "id": "headache-watch",
+                "leaf": {
+                  "color": "yellow",
+                  "title": "Keep watching",
+                  "cause": "Headache without vision changes; NASA monitors eye and brain changes on long missions.",
+                  "action": "Repeat your check-in and tell the crew if it continues.",
+                  "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "limb-pain",
+      "label": "Pain in an arm, forearm or leg",
+      "areas": ["arm", "forearm", "thigh", "shin", "knee"],
+      "redFlag": false,
+      "risks": ["musculoskeletal"],
+      "questions": ["trigger", "severity", "onset"],
+      "tree": {
+        "id": "limb-root",
+        "question": { "id": "trigger", "text": "Did something cause it?" },
+        "answers": {
+          "A hit or fall": {
+            "id": "limb-fracture",
+            "leaf": {
+              "color": "red",
+              "title": "Possible fracture",
+              "cause": "NASA explains that without gravity bones break down and become more brittle, so breaks are more likely.",
+              "action": "Stop using the limb, tell the crew and send a report to the flight surgeons.",
+              "source": "https://www.nasa.gov/reference/risk-of-spaceflight-induced-bone-changes/"
+            }
+          },
+          "Exercise": {
+            "id": "limb-exercise",
+            "leaf": {
+              "color": "green",
+              "title": "Linked to your exercise session",
+              "cause": "All astronauts exercise to counteract losses in bone, muscle and heart performance, says NASA.",
+              "action": "Rest the area, log it, and keep your next session lighter.",
+              "source": "https://www.nasa.gov/reference/risk-of-reduced-cardiorespiratory-and-musculoskeletal-fitness/"
+            }
+          },
+          "Nothing I know": {
+            "id": "limb-loss",
+            "leaf": {
+              "color": "yellow",
+              "title": "Possible muscle or bone change",
+              "cause": "NASA reports bone and muscle loss during spaceflight.",
+              "action": "Tell the crew and do today's exercise session carefully.",
+              "source": "https://www.nasa.gov/reference/risk-of-spaceflight-induced-bone-changes/"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

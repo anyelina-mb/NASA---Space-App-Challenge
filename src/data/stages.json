@@ -1,0 +1,47 @@
+[
+  {
+    "id": "first",
+    "name": "First days in space",
+    "months": [1, 1],
+    "gravity": "microgravity",
+    "background": "/media/bg-first.jpg",
+    "laika": "Welcome to microgravity! Fluids shift toward your head and you may feel dizzy while your body adapts.",
+    "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/"
+  },
+  {
+    "id": "journey",
+    "name": "Journey to Mars",
+    "months": [2, 8],
+    "gravity": "microgravity",
+    "background": "/media/bg-journey.jpg",
+    "laika": "Mars is about 140 million miles from Earth on average. Help from home gets slower, so we check ourselves.",
+    "source": "https://www.nasa.gov/hrp/hazards/"
+  },
+  {
+    "id": "mars",
+    "name": "On Mars",
+    "months": [9, 27],
+    "gravity": "0.38 g",
+    "background": "/media/bg-mars.jpg",
+    "laika": "We landed! Mars has about three-eighths of Earth's gravity, so muscles, bones and balance adjust again.",
+    "source": "https://www.nasa.gov/hrp/hazards/"
+  },
+  {
+    "id": "return",
+    "name": "Return journey",
+    "months": [28, 35],
+    "gravity": "microgravity",
+    "background": "/media/bg-return.jpg",
+    "laika": "Back in microgravity on the way home. Keep exercising to protect bone and muscle.",
+    "source": "https://www.nasa.gov/reference/risk-of-reduced-cardiorespiratory-and-musculoskeletal-fitness/"
+  },
+  {
+    "id": "earth",
+    "name": "Back on Earth",
+    "months": [36, 36],
+    "gravity": "1 g",
+    "background": "/media/bg-earth.jpg",
+    "laika": "Home! Balance, blood pressure and strength need checks while you readapt to Earth's gravity.",
+    "source": "https://www.nasa.gov/hrp/risks/"
+  }
+]
