@@ -5,6 +5,13 @@ import { getStage, riskWeight, MISSION_MONTHS } from './missionClock.js';
 
 const LEVEL = { green: 1, yellow: 2, red: 3 };
 
+// Same values as src/data/avatars.json
+export const PROFILE_OPTIONS = {
+  bodyType: ['female', 'male'],
+  skinTone: ['light', 'medium', 'dark'],
+  suitColor: ['orange', 'blue', 'red'],
+};
+
 const RED_FLAG_RESULT = {
   color: 'red',
   title: 'Emergency symptom',
@@ -22,8 +29,12 @@ function compareToBaseline(value, base) {
   return 'green';
 }
 
-export function createEngine({ stages, risks, symptoms, bodyParts }) {
+export function createEngine({ stages, risks, symptoms, bodyParts, lessons = { lessons: [] } }) {
   const riskById = new Map(risks.risks.map((r) => [r.id, r]));
+  // Learn mode: lessons sorted by the month they start, so binary search finds a month's lessons
+  const lessonIndex = new SortedArray((l) => l.start);
+  for (const l of lessons.lessons) lessonIndex.insert(l);
+  const learned = new Set();
   const symptomById = new Map(symptoms.symptoms.map((s) => [s.id, s]));
   const partByMesh = new Map(bodyParts.map((p) => [p.mesh, p]));
   const trees = new Map(
@@ -39,7 +50,18 @@ export function createEngine({ stages, risks, symptoms, bodyParts }) {
     outbox: new Queue(),
     diary: new SortedArray((e) => e.month),
     order: 0,
+    profile: null, // { name, bodyType, skinTone, suitColor }, set by the Character Creator
   };
+
+  // Lessons active in a month (start <= month <= end), optionally only for one body area
+  function lessonsFor(month, area = null) {
+    getStage(month, stages); // throws RangeError for months outside 1-36
+    const { found, steps } = lessonIndex.upTo(month);
+    const lessonsNow = found.filter((l) => l.end >= month && (!area || l.areas.includes(area)));
+    return { lessons: lessonsNow, steps };
+  }
+
+  const progress = () => ({ learned: learned.size, total: lessons.lessons.length, ids: [...learned] });
 
   function addAlert(color, title) {
     if (color === 'green') return;
@@ -70,6 +92,18 @@ export function createEngine({ stages, risks, symptoms, bodyParts }) {
     setBaseline(baseline) {
       state.baseline = { ...baseline };
     },
+
+    setProfile({ name, bodyType, skinTone, suitColor }) {
+      const clean = String(name ?? '').trim();
+      if (!clean) throw new Error('Profile needs a name');
+      if (!PROFILE_OPTIONS.bodyType.includes(bodyType)) throw new Error(`Unknown body type: ${bodyType}`);
+      if (!PROFILE_OPTIONS.skinTone.includes(skinTone)) throw new Error(`Unknown skin tone: ${skinTone}`);
+      if (!PROFILE_OPTIONS.suitColor.includes(suitColor)) throw new Error(`Unknown suit color: ${suitColor}`);
+      state.profile = { name: clean, bodyType, skinTone, suitColor };
+      return state.profile;
+    },
+
+    getProfile() { return state.profile; },
 
     getStage(month = state.month) {
       return getStage(month, stages);
@@ -176,5 +210,32 @@ export function createEngine({ stages, risks, symptoms, bodyParts }) {
     getOutbox() { return state.outbox.toArray(); },
     sendOldestReport() { return state.outbox.dequeue(); },
     searchDiary(month) { return state.diary.findByKey(month); },
+
+    // ---------- Learn mode ----------
+    // Lessons active in a month (start <= month <= end), optionally only for one body area.
+    // Binary search cuts the lessons that start after the month: O(log n + k)
+    getLessons({ month = state.month, area = null } = {}) { return lessonsFor(month, area); },
+
+    // The k most important topics of a month, ranked by a max-heap:
+    // score = lesson importance + how strong its NASA risk is in that stage (missionClock weights)
+    getTopTopics(month = state.month, k = 3) {
+      const heap = new MaxHeap((a, b) => (a.score !== b.score ? a.score > b.score : a.order < b.order));
+      lessonsFor(month).lessons.forEach((l, order) => {
+        const risk = l.riskId ? riskById.get(l.riskId) : null;
+        const weight = risk ? riskWeight(risk, month, stages, risks.transitionMonths) : 2;
+        heap.insert({ lesson: l, score: l.importance + weight, order });
+      });
+      const top = [];
+      while (top.length < k && !heap.isEmpty()) top.push(heap.extract());
+      return top.map((t) => ({ ...t.lesson, score: t.score }));
+    },
+
+    markLearned(id) {
+      if (!lessons.lessons.some((l) => l.id === id)) throw new Error(`Unknown lesson: ${id}`);
+      learned.add(id);
+      return progress();
+    },
+
+    getProgress() { return progress(); },
   };
 }

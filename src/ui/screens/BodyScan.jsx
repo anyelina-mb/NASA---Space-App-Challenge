@@ -8,6 +8,8 @@ export default function BodyScan({ engine, refresh, goBack }) {
   const [symptomIds, setSymptomIds] = useState([]);
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
+  // Body chosen in the Character Creator (same 23 part names in both models)
+  const bodyType = engine.getProfile()?.bodyType ?? 'male';
 
   const toggle = (list, setList) => (value) =>
     setList(list.includes(value) ? list.filter((v) => v !== value) : [...list, value]);
@@ -29,11 +31,17 @@ export default function BodyScan({ engine, refresh, goBack }) {
   return (
     <section className="screen scan">
       <div className="viewer">
-        <BodyViewer selected={parts} onToggle={toggle(parts, setParts)} />
+        <BodyViewer
+          key={bodyType}
+          selected={parts}
+          onToggle={toggle(parts, setParts)}
+          modelUrl={bodyType === 'male' ? '/models/body.glb' : '/models/body_female.glb'}
+        />
       </div>
 
       <aside className="panel">
         <button onClick={goBack}>← Mission Control</button>
+        <p className="label">Check yourself · practice the self-check astronauts do</p>
         <h2>Where does it hurt?</h2>
         <p className="muted">{areas.length ? areas.map((a) => a.label).join(', ') : 'Click one or more body parts.'}</p>
 

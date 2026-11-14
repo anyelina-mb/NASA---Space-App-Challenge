@@ -3,10 +3,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { MaxHeap, Queue, Stack, SortedArray, DecisionTree } from '../src/ds/index.js';
-import { createEngine } from '../src/engine/createEngine.js';
+import { createEngine, PROFILE_OPTIONS } from '../src/engine/createEngine.js';
 
 const load = (f) => JSON.parse(readFileSync(new URL(`../src/data/${f}`, import.meta.url)));
-const data = () => ({ stages: load('stages.json'), risks: load('risks.json'), symptoms: load('symptoms.json'), bodyParts: load('body-parts.json') });
+const data = () => ({ stages: load('stages.json'), risks: load('risks.json'), symptoms: load('symptoms.json'), bodyParts: load('body-parts.json'), lessons: load('lessons.json') });
 
 // ---------- Data structures ----------
 test('MaxHeap returns items from highest to lowest', () => {
@@ -97,4 +97,71 @@ test('Edge cases: no symptoms, month limits', () => {
   while (e.state.month < 36) e.advanceMonth();
   assert.equal(e.advanceMonth().finished, true);
   assert.equal(e.state.month, 36);
+});
+
+// ---------- Player profile (Character Creator) ----------
+test('Profile: saved with a trimmed name and every look matches an avatar image', () => {
+  const engine = createEngine(data());
+  assert.equal(engine.getProfile(), null);
+  const p = engine.setProfile({ name: '  Cmdr. Anyi ', bodyType: 'female', skinTone: 'dark', suitColor: 'blue' });
+  assert.deepEqual(p, { name: 'Cmdr. Anyi', bodyType: 'female', skinTone: 'dark', suitColor: 'blue' });
+  assert.equal(engine.getProfile().bodyType, 'female');
+
+  const avatars = load('avatars.json');
+  for (const b of PROFILE_OPTIONS.bodyType) for (const s of PROFILE_OPTIONS.skinTone) for (const c of PROFILE_OPTIONS.suitColor) {
+    assert.ok(avatars.some((a) => a.bodyType === b && a.skinTone === s && a.suitColor === c), `${b}/${s}/${c} has an image`);
+  }
+});
+
+test('Profile edge cases: empty name and unknown options are rejected', () => {
+  const engine = createEngine(data());
+  const ok = { name: 'Anyi', bodyType: 'male', skinTone: 'light', suitColor: 'red' };
+  assert.throws(() => engine.setProfile({ ...ok, name: '   ' }));
+  assert.throws(() => engine.setProfile({ ...ok, bodyType: 'robot' }));
+  assert.throws(() => engine.setProfile({ ...ok, skinTone: 'green' }));
+  assert.throws(() => engine.setProfile({ ...ok, suitColor: 'pink' }));
+  assert.equal(engine.getProfile(), null, 'a rejected profile is not saved');
+});
+
+// ---------- Learn mode (lessons by month) ----------
+test('SortedArray.upTo returns every item up to a key with binary search', () => {
+  const d = new SortedArray((e) => e.start);
+  assert.deepEqual(d.upTo(5).found, [], 'empty array');
+  [9, 1, 28, 2, 12, 9].forEach((start) => d.insert({ start }));
+  assert.deepEqual(d.upTo(9).found.map((e) => e.start), [1, 2, 9, 9]);
+  assert.equal(d.upTo(0).found.length, 0, 'before the first item');
+  assert.equal(d.upTo(99).found.length, 6, 'after the last item');
+});
+
+test('Learn: month 9 shows the landing lesson, month 1 does not; body area filters', () => {
+  const e = createEngine(data());
+  const ids = (m, area) => e.getLessons({ month: m, area }).lessons.map((l) => l.id);
+  assert.ok(ids(9).includes('landing-38'));
+  assert.ok(!ids(1).includes('landing-38'));
+  assert.ok(ids(1).includes('leaving-gravity'));
+  assert.ok(ids(20, 'head').every((id) => e.getLessons({ month: 20, area: 'head' }).lessons.find((l) => l.id === id).areas.includes('head')));
+  assert.deepEqual(ids(36, 'hand'), [], 'no lesson for that area');
+  assert.throws(() => e.getLessons({ month: 0 }), RangeError);
+});
+
+test('Learn: every lesson has a NASA source, a valid month range and a body area', () => {
+  const { lessons } = load('lessons.json');
+  const areas = new Set(load('body-parts.json').map((p) => p.area));
+  for (const l of lessons) {
+    assert.match(l.source, /nasa\.gov/, `${l.id} source`);
+    assert.ok(l.start >= 1 && l.end <= 36 && l.start <= l.end, `${l.id} months`);
+    assert.ok(l.areas.length > 0 && l.areas.every((a) => areas.has(a)), `${l.id} areas`);
+  }
+});
+
+test('Learn: the heap ranks the top topics of a month and progress counts learned lessons', () => {
+  const e = createEngine(data());
+  const top = e.getTopTopics(9, 3);
+  assert.equal(top.length, 3);
+  assert.ok(top[0].score >= top[1].score && top[1].score >= top[2].score, 'highest score first');
+  assert.equal(top[0].id, 'landing-38', 'landing in Mars gravity is the top topic of month 9');
+  assert.equal(e.getTopTopics(36, 10).length, 1, 'k larger than the lessons available');
+  assert.equal(e.markLearned('landing-38').learned, 1);
+  assert.equal(e.markLearned('landing-38').learned, 1, 'learning twice counts once');
+  assert.throws(() => e.markLearned('not-a-lesson'));
 });

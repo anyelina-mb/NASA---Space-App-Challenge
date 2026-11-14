@@ -21,7 +21,7 @@ export default function MissionControl({ engine, refresh, goTo }) {
       </header>
 
       <div className="laika">
-        <span className="laika-avatar" aria-hidden>🐕</span>
+        <img className="laika-float" src="/media/laika/laika_happy.png" width="96" height="96" alt="Laika" />
         <p className="bubble">{stage.laika}</p>
       </div>
 
@@ -50,10 +50,12 @@ export default function MissionControl({ engine, refresh, goTo }) {
       </div>
 
       <nav className="actions">
-        <button className="primary" onClick={() => goTo('scan')}>Body scan</button>
+        <button className="primary" onClick={() => goTo('learn')}>Learn: life on Mars</button>
+        <button onClick={() => goTo('scan')}>Check yourself (body scan)</button>
         <button onClick={() => { engine.advanceMonth(); refresh(); }}>Next month →</button>
+        <button onClick={() => goTo('creator')}>Edit astronaut</button>
       </nav>
-      <p className="disclaimer">Self-assessment for a game, not a medical diagnosis. Data based on NASA Human Research Program resources.</p>
+      <p className="disclaimer">Educational experience and self-check practice, not a medical diagnosis. Data based on NASA Human Research Program resources.</p>
     </section>
   );
 }

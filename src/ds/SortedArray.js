@@ -1,6 +1,6 @@
 // Array kept sorted by a numeric key (the mission month).
-// Used for: the diary. Binary search jumps to any month.
-// insert O(n) (binary search + splice) · findByKey O(log n + k) · space O(n)
+// Used for: the diary and the Learn lessons. Binary search jumps to any month.
+// insert O(n) (binary search + splice) · findByKey / upTo O(log n + k) · space O(n)
 export class SortedArray {
   constructor(key = (item) => item.month) {
     this.items = [];
@@ -36,6 +36,13 @@ export class SortedArray {
       found.push(this.items[i]);
     }
     return { found, steps };
+  }
+
+  // Every item whose key is <= target (a prefix of the array). Binary search finds where it ends.
+  // O(log n) to find the cut + O(k) to copy the k items
+  upTo(target) {
+    const { index, steps } = this.lowerBound(target + 1);
+    return { found: this.items.slice(0, index), steps };
   }
 
   toArray() { return [...this.items]; }
