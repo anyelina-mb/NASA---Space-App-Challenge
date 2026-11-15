@@ -3,6 +3,13 @@
 NASA Space Apps 2026 · *Create Health Monitoring Software for Astronauts on Space Missions*
 Also our Data Structures final project.
 
+**▶ Try it live: [human-rover.netlify.app](https://human-rover.netlify.app/)** (works best on a laptop or desktop, with sound on)
+
+**In 30 seconds:** on Mars, a message to the doctor on Earth can take up to 22 minutes each way, so astronauts must
+check their own health. HUMAN ROVER is an educational simulation with game elements: you live a 36-month mission to
+Mars with Laika as your guide, log your health every month, check symptoms on a 3D body, and learn what NASA knows
+about each risk at each stage of the trip.
+
 An educational experience about a 36-month crewed mission to Mars, focused on **life on Mars**.
 It has two modes, both on the same 3D body:
 
@@ -16,6 +23,24 @@ It has two modes, both on the same 3D body:
 
 > No human has lived on Mars yet. This is an educational experience and self-check practice,
 > **not a medical diagnosis**.
+
+## Assumptions and limits
+
+- **Not a medical device.** Green / yellow / red use demo limits (temperature ±0.5 °C / ±1.5 °C, sleep 1 h / 3 h less,
+  others 15% / 30% change from your Earth baseline). NASA does not publish these limits; in a real mission flight
+  surgeons would set them for each astronaut. The app says this on screen.
+- **No human has lived on Mars yet.** Lessons are labeled `iss` (learned on the space station), `expected` (what NASA
+  expects for Mars) or `fact` (measured Mars facts).
+- The Earth baseline starts with example values until the player enters their own (Menu › My Earth baseline).
+- "Show an example mission" in Trends draws made-up months as hollow dots; they are never saved as real check-ins.
+- Values are typed in by the astronaut; real sensors would be the next step.
+- Women-specific content is used only where NASA has data (one lesson, NTRS 20040088708).
+- Progress is saved in the browser (localStorage), so it stays on that device and browser.
+
+## Backup
+
+If the live site or the connection fails during the presentation: `npm install && npm run dev` runs it offline from
+this repo, and the demo video is the second backup.
 
 ## Run it
 
