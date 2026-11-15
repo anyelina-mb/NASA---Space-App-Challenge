@@ -3,6 +3,9 @@
 // Continue saves the choice in the engine as the player profile (Body Scan uses bodyType).
 import { useState } from 'react';
 import avatars from '../../data/avatars.json';
+import Stage from '../Stage.jsx';
+import NavButtons from '../NavButtons.jsx';
+import { sound } from '../../audio/sound.js';
 
 const BODIES = [
   { id: 'female', label: 'Female' },
@@ -24,6 +27,7 @@ const STEPS = ['Crew ID', 'Astronaut', 'Mission', 'Launch'];
 const findAvatar = (bodyType, skinTone, suitColor) =>
   avatars.find((a) => a.bodyType === bodyType && a.skinTone === skinTone && a.suitColor === suitColor);
 
+// eslint-disable-next-line no-unused-vars
 function Swatches({ label, options, value, onChange }) {
   return (
     <div className="cc-field">
@@ -59,97 +63,78 @@ export default function Creator({ engine, refresh, goTo, goBack, canGoBack }) {
   const displayName = name.trim() || 'Your astronaut';
 
   function save() {
+    sound.play('success');
     engine.setProfile({ name, bodyType, skinTone, suitColor });
-    if (canGoBack) goBack();
-    else goTo('control');
+    if (saved) goBack(); // editing from the Menu or from Launch
+    else goTo('launch'); // first time: next stop is the launch pad
     refresh();
   }
 
-  return (
-    <section className="creator">
-      <header className="cc-topbar cc-glass">
-        <p className="cc-brand">HUMAN ROVER</p>
-        <ol className="cc-steps" aria-label="Setup steps">
-          {STEPS.map((s, i) => (
-            <li key={s} className={i === 0 ? 'done' : i === 1 ? 'current' : ''} aria-current={i === 1 ? 'step' : undefined}>
-              <span className="cc-step-num">{i === 0 ? '✓' : i + 1}</span>{s}
-            </li>
-          ))}
-        </ol>
-      </header>
-
-      <div className="cc-heading">
-        <h1>CREATE YOUR ASTRONAUT</h1>
-        <p>Your look is just for fun. Your health comes from your check-ins.</p>
-      </div>
-
-      <div className="cc-layout">
-        <div className="cc-panel cc-glass">
-          <div className="cc-field">
-            <label className="cc-label" htmlFor="cc-name">Astronaut name</label>
-            <input
-              id="cc-name"
-              className="cc-input"
-              value={name}
-              maxLength={24}
-              placeholder="Cmdr. Anyi"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-
-          <div className="cc-field">
-            <p className="cc-label" id="cc-body">Body · used in your 3D body scan</p>
-            <div className="cc-bodies" role="radiogroup" aria-labelledby="cc-body">
-              {BODIES.map((b) => (
-                <button
-                  key={b.id}
-                  type="button"
-                  role="radio"
-                  aria-checked={bodyType === b.id}
-                  className={`cc-body-card${bodyType === b.id ? ' selected' : ''}`}
-                  onClick={() => setBodyType(b.id)}
-                >
-                  <img src={findAvatar(b.id, skinTone, suitColor)?.src} alt="" />
-                  <span className="cc-caption">{b.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <Swatches label="Skin tone" options={SKIN_TONES} value={skinTone} onChange={setSkinTone} />
-        </div>
-
-        <div className="cc-preview">
-          <div className="cc-avatar">
-            {avatar && <img src={avatar.src} alt={`${displayName}: ${bodyType} astronaut, ${skinTone} skin, ${suitColor} suit`} />}
-          </div>
-          <img className="cc-platform" src="/media/creator/glow-platform.svg" width="440" height="130" alt="" />
-          <div className="cc-nametag cc-glass">
-            <p className="cc-nametag-name">{displayName}</p>
-            <p className="cc-nametag-sub">{suitLabel} suit</p>
-          </div>
-        </div>
-
-        <div className="cc-panel cc-glass">
-          <Swatches label="Suit stripes" options={SUITS} value={suitColor} onChange={setSuitColor} />
-        </div>
-      </div>
-
-      <footer className="cc-footer">
-        <div className="cc-laika">
-          <img src="/media/creator/laika.png" width="148" height="148" alt="Laika, the mission dog" />
-          <div className="cc-bubble cc-glass">
-            <p className="cc-bubble-name">Laika</p>
-            <p>Looking sharp! The body you pick is the 3D body you'll scan every month.</p>
-          </div>
-        </div>
-        <nav className="cc-nav">
-          {canGoBack && <button type="button" className="cc-btn secondary" onClick={goBack}>←&nbsp; Back</button>}
-          <button type="button" className="cc-btn primary" disabled={!name.trim()} onClick={save}>
-            Continue&nbsp; →&nbsp; Mission control
+  const Pick = ({ title, options, value, onChange }) => (
+    <div className="cr-field">
+      <p className="cy-step">{title}</p>
+      <div className="cr-options">
+        {options.map((o) => (
+          <button key={o.id} type="button" className={`cr-option${value === o.id ? ' on' : ''}`} aria-pressed={value === o.id} onClick={() => { sound.play('select'); onChange(o.id); }}>
+            <i style={{ background: o.color }} />{o.label}
           </button>
-        </nav>
-      </footer>
-    </section>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <Stage background="/media/bg/bg-trip.jpg" className="mc cr">
+      <header className="mc-top glass cy-top">
+        <p className="mc-brand">HUMAN ROVER</p>
+        <ol className="ln-steps"><li className="on">1 · Your explorer</li><li>2 · Launch</li></ol>
+        <NavButtons home={false} />
+      </header>
+      <p className="cy-kicker">STEP 1 OF 2 · YOUR EXPLORER</p>
+      <h1 className="cy-title">Create your astronaut</h1>
+      <p className="ln2-sub cr-sub">Your look is just for fun. Your health comes from your check-ins.</p>
+
+      <section className="cr-left glass">
+        <div className="cr-field">
+          <label className="cy-step" htmlFor="cc-name">ASTRONAUT NAME</label>
+          <input id="cc-name" className="cr-input" value={name} maxLength={24} placeholder="Type your name" onChange={(e) => setName(e.target.value)} />
+        </div>
+        <div className="cr-field">
+          <p className="cy-step">BODY · USED IN YOUR 3D BODY SCAN</p>
+          <div className="cr-bodies">
+            {BODIES.map((b) => (
+              <button key={b.id} type="button" className={`cr-body${bodyType === b.id ? ' on' : ''}`} aria-pressed={bodyType === b.id} onClick={() => { sound.play('select'); setBodyType(b.id); }}>
+                <img src={findAvatar(b.id, skinTone, suitColor)?.src} alt="" />
+                <span>{b.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <Pick title="SKIN TONE" options={SKIN_TONES} value={skinTone} onChange={setSkinTone} />
+      </section>
+
+      <div className="cr-center">
+        {avatar && <img className="cr-avatar" src={avatar.src} alt={`${displayName}: ${bodyType} astronaut, ${skinTone} skin, ${suitColor} suit`} />}
+        <div className="cr-tag glass"><strong>{displayName}</strong><span>{suitLabel} suit</span></div>
+      </div>
+
+      <section className="cr-right glass">
+        <Pick title="SUIT STRIPES" options={SUITS} value={suitColor} onChange={setSuitColor} />
+        <p className="mc-hand cr-note">you can change your look anytime from the Menu</p>
+      </section>
+
+      <div className="cy-laika">
+        <img src="/media/bg/laika-circle.jpg" alt="Laika" />
+        <div className="mc-bubble glass">
+          <p className="mc-bubble-name">Laika</p>
+          <p>Looking sharp! The body you pick is the 3D body you&apos;ll check every month.</p>
+          <p className="mc-next">Next → {name.trim() ? 'Tap Continue' : 'Type your name'}</p>
+        </div>
+      </div>
+      <div className="cy-actions">
+        {canGoBack && <button type="button" className="cy-btn ghost" onClick={() => { sound.play('click'); goBack(); }}>← Back</button>}
+        <button type="button" className="cy-btn" disabled={!name.trim()} onClick={save}>{saved ? 'Save changes →' : 'Continue → Launch'}</button>
+      </div>
+    </Stage>
   );
 }

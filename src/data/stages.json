@@ -2,46 +2,162 @@
   {
     "id": "first",
     "name": "First days in space",
-    "months": [1, 1],
+    "months": [
+      1,
+      1
+    ],
     "gravity": "microgravity",
-    "background": "/media/bg-first.jpg",
+    "background": "/media/bg/bg-trip.jpg",
     "laika": "Welcome to microgravity! Fluids shift toward your head and you may feel dizzy while your body adapts.",
-    "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/"
+    "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/",
+    "scene": "trip",
+    "laikaImg": "laika_thinking.png",
+    "next": "Do your first check-in, then exercise",
+    "tasks": [
+      {
+        "id": "checkin",
+        "text": "Monthly check-in",
+        "hint": "2 min"
+      },
+      {
+        "id": "exercise",
+        "text": "Exercise session",
+        "hint": "bones and muscles"
+      },
+      {
+        "id": "diary",
+        "text": "Diary note",
+        "hint": "one line is enough"
+      }
+    ]
   },
   {
     "id": "journey",
     "name": "Journey to Mars",
-    "months": [2, 8],
+    "months": [
+      2,
+      8
+    ],
     "gravity": "microgravity",
-    "background": "/media/bg-journey.jpg",
+    "background": "/media/bg/bg-trip.jpg",
     "laika": "Mars is about 140 million miles from Earth on average. Help from home gets slower, so we check ourselves.",
-    "source": "https://www.nasa.gov/hrp/hazards/"
+    "source": "https://www.nasa.gov/hrp/hazards/",
+    "scene": "trip",
+    "laikaImg": "laika_exercise.png",
+    "next": "Start today's exercise session",
+    "tasks": [
+      {
+        "id": "checkin",
+        "text": "Monthly check-in",
+        "hint": "2 min"
+      },
+      {
+        "id": "exercise",
+        "text": "Exercise session",
+        "hint": "bones and muscles"
+      },
+      {
+        "id": "diary",
+        "text": "Diary note",
+        "hint": "one line is enough"
+      }
+    ]
   },
   {
     "id": "mars",
     "name": "On Mars",
-    "months": [9, 27],
+    "months": [
+      9,
+      27
+    ],
     "gravity": "0.38 g",
-    "background": "/media/bg-mars.jpg",
+    "background": "/media/bg/bg-mars.jpg",
     "laika": "We landed! Mars has about three-eighths of Earth's gravity, so muscles, bones and balance adjust again.",
-    "source": "https://www.nasa.gov/hrp/hazards/"
+    "source": "https://www.nasa.gov/hrp/hazards/",
+    "scene": "mars",
+    "laikaImg": "laika_happy.png",
+    "next": "Tap Start on your check-in (Today box)",
+    "tasks": [
+      {
+        "id": "checkin",
+        "text": "Monthly check-in",
+        "hint": "2 min"
+      },
+      {
+        "id": "exercise",
+        "text": "Log exercise",
+        "hint": "bones and muscles"
+      },
+      {
+        "id": "diary",
+        "text": "Diary note",
+        "hint": "one line is enough"
+      }
+    ],
+    "laikaLater": "Life on Mars: about three-eighths of Earth's gravity, so we keep exercising and checking muscles, bones and balance."
   },
   {
     "id": "return",
     "name": "Return journey",
-    "months": [28, 35],
+    "months": [
+      28,
+      35
+    ],
     "gravity": "microgravity",
-    "background": "/media/bg-return.jpg",
+    "background": "/media/bg/bg-home.jpg",
     "laika": "Back in microgravity on the way home. Keep exercising to protect bone and muscle.",
-    "source": "https://www.nasa.gov/reference/risk-of-reduced-cardiorespiratory-and-musculoskeletal-fitness/"
+    "source": "https://www.nasa.gov/reference/risk-of-reduced-cardiorespiratory-and-musculoskeletal-fitness/",
+    "scene": "home",
+    "laikaImg": "laika_thinking.png",
+    "next": "Start your exercise, then your check-in",
+    "tasks": [
+      {
+        "id": "checkin",
+        "text": "Monthly check-in",
+        "hint": "2 min"
+      },
+      {
+        "id": "exercise",
+        "text": "Exercise session",
+        "hint": "get ready for 1 g"
+      },
+      {
+        "id": "report",
+        "text": "Report to Earth",
+        "hint": "send what's in the outbox"
+      }
+    ]
   },
   {
     "id": "earth",
     "name": "Back on Earth",
-    "months": [36, 36],
+    "months": [
+      36,
+      36
+    ],
     "gravity": "1 g",
-    "background": "/media/bg-earth.jpg",
+    "background": "/media/bg/bg-earth.jpg",
     "laika": "Home! Balance, blood pressure and strength need checks while you readapt to Earth's gravity.",
-    "source": "https://www.nasa.gov/hrp/risks/"
+    "source": "https://www.nasa.gov/hrp/risks/",
+    "scene": "earth",
+    "laikaImg": "laika_celebrate.png",
+    "next": "Do your balance check first",
+    "tasks": [
+      {
+        "id": "checkin",
+        "text": "Final check-in",
+        "hint": "compare with your Earth baseline"
+      },
+      {
+        "id": "balance",
+        "text": "Balance check",
+        "hint": "inner ear and legs"
+      },
+      {
+        "id": "report",
+        "text": "Mission report",
+        "hint": "for the flight surgeons"
+      }
+    ]
   }
 ]

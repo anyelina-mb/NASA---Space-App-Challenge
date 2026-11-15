@@ -10,9 +10,13 @@
   "lessons": [
     {
       "id": "leaving-gravity",
-      "start": 1, "end": 2,
-      "hazard": "gravity", "riskId": "vestibular",
-      "areas": ["head"],
+      "start": 1,
+      "end": 2,
+      "hazard": "gravity",
+      "riskId": "vestibular",
+      "areas": [
+        "head"
+      ],
       "importance": 3,
       "title": "Leaving Earth's gravity",
       "text": "In the first days without gravity, your inner ear gets mixed signals, so dizziness and motion sickness are common. From space station crews, NASA has learned that the body adapts over time.",
@@ -20,13 +24,30 @@
       "laika": "laika_thinking.png",
       "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/",
       "sourceName": "NASA HRP · Sensorimotor and vestibular function",
-      "quiz": { "q": "Which part of the body gets confused first without gravity?", "options": ["The inner ear", "The knees", "The hands"], "answer": 0 }
+      "quiz": {
+        "q": "Which part of the body gets confused first without gravity?",
+        "options": [
+          "The inner ear",
+          "The knees",
+          "The hands"
+        ],
+        "answer": 0
+      }
     },
     {
       "id": "floating-bones",
-      "start": 2, "end": 8,
-      "hazard": "gravity", "riskId": "musculoskeletal",
-      "areas": ["thigh", "shin", "knee", "lower-back", "pelvis", "foot"],
+      "start": 2,
+      "end": 8,
+      "hazard": "gravity",
+      "riskId": "musculoskeletal",
+      "areas": [
+        "thigh",
+        "shin",
+        "knee",
+        "lower-back",
+        "pelvis",
+        "foot"
+      ],
       "importance": 2,
       "title": "Months of floating: bones and muscles",
       "text": "When your legs don't carry your weight, bones and muscles start to weaken. That's why astronauts on the space station exercise every day.",
@@ -34,13 +55,29 @@
       "laika": "laika_exercise.png",
       "source": "https://www.nasa.gov/reference/risk-of-spaceflight-induced-bone-changes/",
       "sourceName": "NASA HRP · Spaceflight-induced bone changes",
-      "quiz": { "q": "Why do astronauts exercise every day?", "options": ["To protect bones and muscles", "To stay warm", "To save oxygen"], "answer": 0 }
+      "quiz": {
+        "q": "Why do astronauts exercise every day?",
+        "options": [
+          "To protect bones and muscles",
+          "To stay warm",
+          "To save oxygen"
+        ],
+        "answer": 0
+      }
     },
     {
       "id": "landing-38",
-      "start": 9, "end": 10,
-      "hazard": "gravity", "riskId": "vestibular",
-      "areas": ["head", "thigh", "knee", "shin", "foot"],
+      "start": 9,
+      "end": 10,
+      "hazard": "gravity",
+      "riskId": "vestibular",
+      "areas": [
+        "head",
+        "thigh",
+        "knee",
+        "shin",
+        "foot"
+      ],
       "importance": 3,
       "title": "Landing in 38% gravity",
       "text": "Gravity on Mars is only 38% as strong as on Earth. After months of floating, your balance has to adapt again, so the first steps on Mars can feel strange. NASA calls these changes between gravity fields one of the 5 hazards.",
@@ -48,13 +85,25 @@
       "laika": "laika_mars.png",
       "source": "https://www.nasa.gov/hrp/hazards/",
       "sourceName": "NASA · 5 Hazards of Human Spaceflight",
-      "quiz": { "q": "How strong is gravity on Mars compared with Earth?", "options": ["About 38%", "About 80%", "Twice as strong"], "answer": 0 }
+      "quiz": {
+        "q": "How strong is gravity on Mars compared with Earth?",
+        "options": [
+          "About 38%",
+          "About 80%",
+          "Twice as strong"
+        ],
+        "answer": 0
+      }
     },
     {
       "id": "mars-day",
-      "start": 9, "end": 27,
-      "hazard": "isolation", "riskId": "sleep",
-      "areas": ["head"],
+      "start": 9,
+      "end": 27,
+      "hazard": "isolation",
+      "riskId": "sleep",
+      "areas": [
+        "head"
+      ],
       "importance": 2,
       "title": "A Mars day is 24 h 39 min",
       "text": "A day on Mars lasts 24 hours, 39 minutes and 35 seconds. That extra time every day can shift your body clock, and NASA lists sleep loss and irregular schedules as a spaceflight risk. Regular light and sleep times help.",
@@ -62,13 +111,26 @@
       "laika": "laika_sleepy.png",
       "source": "https://www.jpl.nasa.gov/news/press_kits/insight/launch/facts/mars-at-a-glance",
       "sourceName": "NASA JPL · Mars at a Glance",
-      "quiz": { "q": "How long is a day on Mars?", "options": ["About 24 h 39 min", "Exactly 24 h", "About 12 h"], "answer": 0 }
+      "quiz": {
+        "q": "How long is a day on Mars?",
+        "options": [
+          "About 24 h 39 min",
+          "Exactly 24 h",
+          "About 12 h"
+        ],
+        "answer": 0
+      }
     },
     {
       "id": "help-is-far",
-      "start": 9, "end": 27,
-      "hazard": "distance", "riskId": null,
-      "areas": ["head", "chest"],
+      "start": 9,
+      "end": 27,
+      "hazard": "distance",
+      "riskId": null,
+      "areas": [
+        "head",
+        "chest"
+      ],
       "importance": 3,
       "title": "Help is up to 22 minutes away",
       "text": "A message between Earth and Mars takes from 0 up to about 22 minutes each way, depending on where the planets are. Doctors on Earth can't answer in real time, so the crew has to check their own health first. That's why the self-check matters.",
@@ -76,13 +138,27 @@
       "laika": "laika_report.png",
       "source": "https://ntrs.nasa.gov/api/citations/20220013418/downloads/ASCEND-Communication%20Delays%2C%20Disruptions%2C%20and%20Blackouts%20for%20Crewed%20Mars%20Missions.pdf",
       "sourceName": "NASA NTRS · Communication Delays for Crewed Mars Missions",
-      "quiz": { "q": "Why do Mars crews need to check their own health?", "options": ["Messages to Earth can take up to ~22 minutes", "There is no doctor on Earth", "Phones don't work in space"], "answer": 0 }
+      "quiz": {
+        "q": "Why do Mars crews need to check their own health?",
+        "options": [
+          "Messages to Earth can take up to ~22 minutes",
+          "There is no doctor on Earth",
+          "Phones don't work in space"
+        ],
+        "answer": 0
+      }
     },
     {
       "id": "outside-the-bubble",
-      "start": 9, "end": 27,
-      "hazard": "radiation", "riskId": null,
-      "areas": ["chest", "abdomen", "head"],
+      "start": 9,
+      "end": 27,
+      "hazard": "radiation",
+      "riskId": null,
+      "areas": [
+        "chest",
+        "abdomen",
+        "head"
+      ],
       "importance": 3,
       "title": "Outside Earth's protective bubble",
       "text": "Earth's magnetic field works like a bubble that shields us from most space radiation. Missions to Mars go beyond that bubble, so NASA is developing radiation shielding to protect crews. Radiation is invisible, which makes it one of the hardest hazards.",
@@ -90,13 +166,30 @@
       "laika": "laika_alert.png",
       "source": "https://www.nasa.gov/reference/risk-of-radiation-induced-cancers",
       "sourceName": "NASA HRP · Radiation-induced cancers",
-      "quiz": { "q": "What protects us from most space radiation on Earth?", "options": ["Earth's magnetic field", "The clouds", "The Moon"], "answer": 0 }
+      "quiz": {
+        "q": "What protects us from most space radiation on Earth?",
+        "options": [
+          "Earth's magnetic field",
+          "The clouds",
+          "The Moon"
+        ],
+        "answer": 0
+      }
     },
     {
       "id": "two-years-38",
-      "start": 12, "end": 27,
-      "hazard": "gravity", "riskId": "musculoskeletal",
-      "areas": ["thigh", "shin", "knee", "lower-back", "upper-back", "pelvis"],
+      "start": 12,
+      "end": 27,
+      "hazard": "gravity",
+      "riskId": "musculoskeletal",
+      "areas": [
+        "thigh",
+        "shin",
+        "knee",
+        "lower-back",
+        "upper-back",
+        "pelvis"
+      ],
       "importance": 2,
       "title": "Living in 3/8 gravity for up to two years",
       "text": "NASA says Mars crews would live and work in three-eighths of Earth's gravity for up to two years. Muscles, bones and organs keep adjusting to that load, so exercise continues on Mars too.",
@@ -104,13 +197,25 @@
       "laika": "laika_exercise.png",
       "source": "https://www.nasa.gov/hrp/hazards/",
       "sourceName": "NASA · 5 Hazards of Human Spaceflight",
-      "quiz": { "q": "How long could a crew live in Mars gravity, according to NASA?", "options": ["Up to two years", "Two weeks", "Ten years"], "answer": 0 }
+      "quiz": {
+        "q": "How long could a crew live in Mars gravity, according to NASA?",
+        "options": [
+          "Up to two years",
+          "Two weeks",
+          "Ten years"
+        ],
+        "answer": 0
+      }
     },
     {
       "id": "same-crew",
-      "start": 14, "end": 27,
-      "hazard": "isolation", "riskId": "behavioral",
-      "areas": ["head"],
+      "start": 14,
+      "end": 27,
+      "hazard": "isolation",
+      "riskId": "behavioral",
+      "areas": [
+        "head"
+      ],
       "importance": 2,
       "title": "Same crew, small habitat",
       "text": "Living for months or years in a small habitat with the same few people can affect mood, stress and teamwork. NASA says Mars crews must be carefully chosen, trained and supported. Talking with your crew and keeping a diary help.",
@@ -118,13 +223,25 @@
       "laika": "laika_worried.png",
       "source": "https://www.nasa.gov/reference/risk-of-behavioral-conditions-and-psychiatric-disorders/",
       "sourceName": "NASA HRP · Behavioral conditions",
-      "quiz": { "q": "What helps with isolation on a long mission?", "options": ["Talking with the crew and keeping a diary", "Sleeping less", "Skipping meals"], "answer": 0 }
+      "quiz": {
+        "q": "What helps with isolation on a long mission?",
+        "options": [
+          "Talking with the crew and keeping a diary",
+          "Sleeping less",
+          "Skipping meals"
+        ],
+        "answer": 0
+      }
     },
     {
       "id": "eyes-and-brain",
-      "start": 15, "end": 27,
-      "hazard": "gravity", "riskId": "sans",
-      "areas": ["head"],
+      "start": 15,
+      "end": 27,
+      "hazard": "gravity",
+      "riskId": "sans",
+      "areas": [
+        "head"
+      ],
       "importance": 2,
       "title": "Eyes and brain on long missions",
       "text": "On long space station missions, NASA has seen changes in the structure of some astronauts' eyes and brain, called SANS. Blurry vision is something to report to the crew and in your next report to Earth.",
@@ -132,13 +249,26 @@
       "laika": "laika_thinking.png",
       "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/",
       "sourceName": "NASA HRP · SANS",
-      "quiz": { "q": "What should you do if your vision gets blurry?", "options": ["Tell the crew and report it", "Ignore it", "Close one eye"], "answer": 0 }
+      "quiz": {
+        "q": "What should you do if your vision gets blurry?",
+        "options": [
+          "Tell the crew and report it",
+          "Ignore it",
+          "Close one eye"
+        ],
+        "answer": 0
+      }
     },
     {
       "id": "dust-and-air",
-      "start": 9, "end": 27,
-      "hazard": "environment", "riskId": null,
-      "areas": ["chest", "head"],
+      "start": 9,
+      "end": 27,
+      "hazard": "environment",
+      "riskId": null,
+      "areas": [
+        "chest",
+        "head"
+      ],
       "importance": 1,
       "title": "Dust and a closed habitat",
       "text": "The habitat is home and machine at once: temperature, pressure, air and microbes must all be controlled. NASA has studied how fine dust on other worlds, like the Moon, can affect lungs, eyes and skin, so keeping dust out of the habitat matters.",
@@ -146,13 +276,26 @@
       "laika": "laika_scan.png",
       "source": "https://www.nasa.gov/directorates/esdmd/hhp/risk-of-adverse-health-performance-effects-of-celestial-dust-exposure",
       "sourceName": "NASA · Celestial dust exposure risk",
-      "quiz": { "q": "Which body parts can fine dust affect?", "options": ["Lungs, eyes and skin", "Only the feet", "Only the hair"], "answer": 0 }
+      "quiz": {
+        "q": "Which body parts can fine dust affect?",
+        "options": [
+          "Lungs, eyes and skin",
+          "Only the feet",
+          "Only the hair"
+        ],
+        "answer": 0
+      }
     },
     {
       "id": "immune",
-      "start": 10, "end": 27,
-      "hazard": "environment", "riskId": "immune",
-      "areas": ["chest", "neck"],
+      "start": 10,
+      "end": 27,
+      "hazard": "environment",
+      "riskId": "immune",
+      "areas": [
+        "chest",
+        "neck"
+      ],
       "importance": 1,
       "title": "The immune system in a closed world",
       "text": "NASA studies how spaceflight changes the immune system. In a closed habitat, monitoring microbes and how the crew's bodies respond is part of keeping everyone healthy.",
@@ -160,13 +303,27 @@
       "laika": "laika_guide.png",
       "source": "https://www.nasa.gov/reference/risk-of-altered-immune-system-responses/",
       "sourceName": "NASA HRP · Immune system responses",
-      "quiz": { "q": "What does NASA monitor to protect the immune system in a habitat?", "options": ["Microbes and the crew's responses", "Only the weather", "Nothing"], "answer": 0 }
+      "quiz": {
+        "q": "What does NASA monitor to protect the immune system in a habitat?",
+        "options": [
+          "Microbes and the crew's responses",
+          "Only the weather",
+          "Nothing"
+        ],
+        "answer": 0
+      }
     },
     {
       "id": "heading-home",
-      "start": 28, "end": 35,
-      "hazard": "gravity", "riskId": "cardio",
-      "areas": ["chest", "thigh", "shin"],
+      "start": 28,
+      "end": 35,
+      "hazard": "gravity",
+      "riskId": "cardio",
+      "areas": [
+        "chest",
+        "thigh",
+        "shin"
+      ],
       "importance": 2,
       "title": "Heading home: heart and fitness",
       "text": "On the way back, the body is in microgravity again. NASA studies how the heart, blood vessels and fitness change in space, so the crew keeps exercising to be ready for Earth's gravity.",
@@ -174,13 +331,28 @@
       "laika": "laika_exercise.png",
       "source": "https://www.nasa.gov/reference/risk-of-cardiovascular-adaptations/",
       "sourceName": "NASA HRP · Cardiovascular adaptations",
-      "quiz": { "q": "Why keep exercising on the trip home?", "options": ["To be ready for Earth's gravity", "To arrive faster", "To use more fuel"], "answer": 0 }
+      "quiz": {
+        "q": "Why keep exercising on the trip home?",
+        "options": [
+          "To be ready for Earth's gravity",
+          "To arrive faster",
+          "To use more fuel"
+        ],
+        "answer": 0
+      }
     },
     {
       "id": "back-on-earth",
-      "start": 36, "end": 36,
-      "hazard": "gravity", "riskId": "vestibular",
-      "areas": ["head", "thigh", "knee", "foot"],
+      "start": 36,
+      "end": 36,
+      "hazard": "gravity",
+      "riskId": "vestibular",
+      "areas": [
+        "head",
+        "thigh",
+        "knee",
+        "foot"
+      ],
       "importance": 3,
       "title": "Back on Earth: full gravity again",
       "text": "After about three years away, the body has to adjust to Earth's full gravity again. Balance, muscles and bones all take time. NASA counts this last change of gravity as part of the same hazard.",
@@ -188,7 +360,259 @@
       "laika": "laika_celebrate.png",
       "source": "https://www.nasa.gov/hrp/hazards/",
       "sourceName": "NASA · 5 Hazards of Human Spaceflight",
-      "quiz": { "q": "How long would a Mars mission keep the crew away from Earth?", "options": ["About three years", "Three days", "Three months"], "answer": 0 }
+      "quiz": {
+        "q": "How long would a Mars mission keep the crew away from Earth?",
+        "options": [
+          "About three years",
+          "Three days",
+          "Three months"
+        ],
+        "answer": 0
+      }
+    },
+    {
+      "id": "fluids-up",
+      "start": 2,
+      "end": 8,
+      "hazard": "gravity",
+      "riskId": "sans",
+      "areas": [
+        "head",
+        "neck"
+      ],
+      "importance": 2,
+      "title": "Fluids move up to your head",
+      "text": "Without gravity, blood and spinal fluid shift toward the head. NASA links this to SANS, changes in the eyes and brain that it studies on long missions.",
+      "basis": "iss",
+      "laika": "laika_thinking.png",
+      "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/",
+      "sourceName": "NASA HRP · SANS",
+      "quiz": {
+        "q": "Where do body fluids move without gravity?",
+        "options": [
+          "Toward the head",
+          "Toward the feet",
+          "They don't move"
+        ],
+        "answer": 0
+      }
+    },
+    {
+      "id": "trip-radiation",
+      "start": 1,
+      "end": 8,
+      "hazard": "radiation",
+      "riskId": null,
+      "areas": [
+        "chest",
+        "abdomen",
+        "head"
+      ],
+      "importance": 2,
+      "title": "Leaving Earth's protective bubble",
+      "text": "Earth's magnetic field shields us from most space radiation. On the way to Mars the ship is outside that bubble, so NASA works on shielding and on instruments that measure radiation on board.",
+      "basis": "expected",
+      "laika": "laika_alert.png",
+      "source": "https://www.nasa.gov/reference/risk-of-radiation-induced-cancers",
+      "sourceName": "NASA HRP · Radiation-induced cancers",
+      "quiz": {
+        "q": "Why is the trip to Mars riskier for radiation than Earth orbit?",
+        "options": [
+          "The ship leaves Earth's magnetic 'bubble'",
+          "The Sun is closer",
+          "Rockets make radiation"
+        ],
+        "answer": 0
+      }
+    },
+    {
+      "id": "trip-sleep",
+      "start": 1,
+      "end": 8,
+      "hazard": "isolation",
+      "riskId": "sleep",
+      "areas": [
+        "head"
+      ],
+      "importance": 1,
+      "title": "Sleeping without day and night",
+      "text": "In a spaceship there is no sunrise. NASA lists sleep loss and irregular schedules as a spaceflight risk, so crews keep regular lights-off times.",
+      "basis": "iss",
+      "laika": "laika_sleepy.png",
+      "source": "https://www.nasa.gov/reference/risk-from-inadequate-sleep-and-irregular-schedules/",
+      "sourceName": "NASA HRP · Sleep and irregular schedules",
+      "quiz": {
+        "q": "What helps your body clock in a spaceship?",
+        "options": [
+          "Regular lights-off times",
+          "Sleeping whenever",
+          "Skipping sleep"
+        ],
+        "answer": 0
+      }
+    },
+    {
+      "id": "trip-crew",
+      "start": 3,
+      "end": 8,
+      "hazard": "isolation",
+      "riskId": "behavioral",
+      "areas": [
+        "head"
+      ],
+      "importance": 1,
+      "title": "Months in a small ship",
+      "text": "The same few people, in a small space, for months. NASA says crews must be carefully chosen, trained and supported. Talking and keeping a diary help.",
+      "basis": "expected",
+      "laika": "laika_worried.png",
+      "source": "https://www.nasa.gov/reference/risk-of-behavioral-conditions-and-psychiatric-disorders/",
+      "sourceName": "NASA HRP · Behavioral conditions",
+      "quiz": {
+        "q": "What helps with isolation on the trip?",
+        "options": [
+          "Talking with the crew and a diary",
+          "Staying alone",
+          "Sleeping less"
+        ],
+        "answer": 0
+      }
+    },
+    {
+      "id": "trip-immune",
+      "start": 2,
+      "end": 8,
+      "hazard": "environment",
+      "riskId": "immune",
+      "areas": [
+        "chest",
+        "neck"
+      ],
+      "importance": 1,
+      "title": "One air for everyone",
+      "text": "The ship is a closed home: everyone shares the same air and surfaces. NASA studies how spaceflight changes the immune system and monitors microbes on board.",
+      "basis": "iss",
+      "laika": "laika_guide.png",
+      "source": "https://www.nasa.gov/reference/risk-of-altered-immune-system-responses/",
+      "sourceName": "NASA HRP · Immune system responses",
+      "quiz": {
+        "q": "Why does NASA watch microbes in the ship?",
+        "options": [
+          "The crew shares a closed space",
+          "For fun",
+          "To grow food"
+        ],
+        "answer": 0
+      }
+    },
+    {
+      "id": "help-slower",
+      "start": 2,
+      "end": 8,
+      "hazard": "distance",
+      "riskId": null,
+      "areas": [
+        "head",
+        "chest"
+      ],
+      "importance": 2,
+      "title": "Help from Earth gets slower",
+      "text": "The farther the ship goes, the longer messages take. NASA says planning and self-sufficiency will be key, so the crew learns to check their own health.",
+      "basis": "expected",
+      "laika": "laika_report.png",
+      "source": "https://www.nasa.gov/hrp/hazards/",
+      "sourceName": "NASA · 5 Hazards of Human Spaceflight",
+      "quiz": {
+        "q": "Why do crews need to check their own health on the way?",
+        "options": [
+          "Messages to Earth get slower",
+          "There is no doctor anywhere",
+          "It's faster"
+        ],
+        "answer": 0
+      }
+    },
+    {
+      "id": "home-radiation",
+      "start": 28,
+      "end": 35,
+      "hazard": "radiation",
+      "riskId": null,
+      "areas": [
+        "chest",
+        "abdomen",
+        "head"
+      ],
+      "importance": 2,
+      "title": "Still outside the bubble",
+      "text": "On the trip home the ship is again beyond Earth's magnetic field. Radiation is invisible, so NASA keeps measuring and shielding until the crew is back.",
+      "basis": "expected",
+      "laika": "laika_alert.png",
+      "source": "https://www.nasa.gov/reference/risk-of-radiation-induced-cancers",
+      "sourceName": "NASA HRP · Radiation-induced cancers",
+      "quiz": {
+        "q": "Can you see space radiation?",
+        "options": [
+          "No, it's invisible",
+          "Yes, it glows",
+          "Only at night"
+        ],
+        "answer": 0
+      }
+    },
+    {
+      "id": "home-eyes",
+      "start": 28,
+      "end": 35,
+      "hazard": "gravity",
+      "riskId": "sans",
+      "areas": [
+        "head"
+      ],
+      "importance": 2,
+      "title": "Eyes on the way home",
+      "text": "Microgravity again means fluids shift up again. NASA says the risk of eye and brain changes (SANS) is higher on longer missions, so keep reporting vision changes.",
+      "basis": "iss",
+      "laika": "laika_thinking.png",
+      "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/",
+      "sourceName": "NASA HRP · SANS",
+      "quiz": {
+        "q": "Does a longer mission raise the SANS risk?",
+        "options": [
+          "Yes",
+          "No",
+          "Only on Mars"
+        ],
+        "answer": 0
+      }
+    },
+    {
+      "id": "women-standing",
+      "start": 36,
+      "end": 36,
+      "onlyFor": "female",
+      "hazard": "gravity",
+      "riskId": "cardio",
+      "areas": [
+        "head",
+        "chest",
+        "thigh"
+      ],
+      "importance": 3,
+      "title": "Standing up after landing (women)",
+      "text": "A NASA review found that women astronauts more often felt faint during stand tests after spaceflight than men. NASA also notes that individual differences usually matter more than gender.",
+      "basis": "iss",
+      "laika": "laika_thinking.png",
+      "source": "https://ntrs.nasa.gov/citations/20040088708",
+      "sourceName": "NASA NTRS · Gender issues related to spaceflight",
+      "quiz": {
+        "q": "After landing, what should you do when you stand up?",
+        "options": [
+          "Stand up slowly and tell the crew if you feel faint",
+          "Jump up fast",
+          "Ignore it"
+        ],
+        "answer": 0
+      }
     }
   ]
 }

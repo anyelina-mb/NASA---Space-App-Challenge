@@ -53,7 +53,7 @@ test('SortedArray keeps months in order and binary search finds them', () => {
 });
 
 test('DecisionTree: unknown answer falls back to the safe "not covered" leaf', () => {
-  const tree = DecisionTree.fromJSON(load('symptoms.json').symptoms.find((s) => s.id === 'limb-pain').tree);
+  const tree = DecisionTree.fromJSON(load('symptoms.json').symptoms.find((s) => s.id === 'pain').tree);
   const ok = tree.traverse({ trigger: 'Exercise' });
   assert.equal(ok.leaf.color, 'green');
   const unknown = tree.traverse({ trigger: 'Alien bite' });
@@ -85,7 +85,7 @@ test('Red flag goes straight to red and into the outbox', () => {
 
 test('Escalation: severe makes yellow red', () => {
   const e = createEngine(data());
-  const r = e.assess({ symptomIds: ['limb-pain'], answers: { trigger: 'Nothing I know', severity: 'Severe' } });
+  const r = e.assess({ symptomIds: ['pain'], answers: { trigger: 'Nothing I know', severity: 'Severe' } });
   assert.equal(r.results[0].leaf.color, 'red');
 });
 
@@ -164,4 +164,173 @@ test('Learn: the heap ranks the top topics of a month and progress counts learne
   assert.equal(e.markLearned('landing-38').learned, 1);
   assert.equal(e.markLearned('landing-38').learned, 1, 'learning twice counts once');
   assert.throws(() => e.markLearned('not-a-lesson'));
+});
+
+// ---------- Mission Control ----------
+test('Month slider: each stage gets its own Today tasks in order (queue), check-in first', () => {
+  const e = createEngine(data());
+  e.setMonth(4);
+  assert.equal(e.getStage().scene, 'trip');
+  assert.equal(e.nextTask().id, 'checkin');
+  e.setMonth(14);
+  assert.equal(e.getStage().scene, 'mars');
+  assert.deepEqual(e.getTasks().map((t) => t.id), ['checkin', 'exercise', 'diary']);
+  e.setMonth(36);
+  assert.equal(e.getStage().scene, 'earth');
+  assert.equal(e.getTasks()[1].id, 'balance');
+  assert.throws(() => e.setMonth(0), RangeError);
+  assert.throws(() => e.setMonth(37), RangeError);
+});
+
+test('Gamification: tasks, check-ins and lessons give XP once; streak counts consecutive months', () => {
+  const e = createEngine(data());
+  e.setBaseline({ heartRate: 64, systolic: 118, temperature: 36.6, sleepHours: 7.5, bloodSugar: 92 });
+  e.saveCheckin({ heartRate: 65, systolic: 118, temperature: 36.6, sleepHours: 7.4, mood: 1, bloodSugar: 94 });
+  assert.equal(e.getStats().xp, 15 + 5, 'check-in XP + task XP');
+  assert.notEqual(e.nextTask().id, 'checkin', 'the check-in left the queue');
+  e.markLearned('leaving-gravity'); e.markLearned('leaving-gravity');
+  assert.equal(e.getStats().xp, 30, 'a lesson only gives XP once');
+  e.advanceMonth();
+  e.saveCheckin({ heartRate: 64, systolic: 118, temperature: 36.6, sleepHours: 7.5, mood: 1 });
+  assert.equal(e.getStats().streak, 2);
+});
+
+test('Exercise log colors the bones and muscles; bad minutes are rejected (edge cases)', () => {
+  const e = createEngine(data());
+  e.setMonth(14);
+  assert.equal(e.getBodySystems().find((s) => s.id === 'bones').color, 'yellow');
+  e.logExercise({ type: 'Treadmill', minutes: 45 });
+  e.logExercise({ type: 'Bike', minutes: 30 });
+  assert.equal(e.getBodySystems().find((s) => s.id === 'bones').color, 'green');
+  assert.throws(() => e.logExercise({ type: 'Bike', minutes: 0 }), RangeError);
+  assert.throws(() => e.logExercise({ type: '', minutes: 20 }), Error);
+});
+
+test('Check yourself: preview has no side effects; blurry vision gradually = yellow SANS, suddenly = red', () => {
+  const e = createEngine(data());
+  e.setMonth(14);
+  const preview = e.assess({ symptomIds: ['blurry-vision'], answers: { sudden: 'Gradually' }, commit: false });
+  assert.equal(preview.results[0].leaf.color, 'yellow');
+  assert.equal(e.getAlerts().length, 0, 'preview must not add alerts');
+  assert.equal(e.assess({ symptomIds: ['blurry-vision'], answers: { sudden: 'Suddenly' } }).results[0].leaf.color, 'red');
+  assert.equal(e.getOutbox().length, 1, 'a red result goes to the outbox queue');
+  const missing = e.assess({ symptomIds: ['blurry-vision'], answers: {}, commit: false });
+  assert.equal(missing.results[0].complete, false, 'no answer yet = not complete');
+});
+
+test('Every body part has something to pick; a tapped area gives a NASA risk clue; top risks come from the heap', () => {
+  const e = createEngine(data());
+  const parts = load('body-parts.json');
+  for (const p of parts) assert.ok(e.getBodyAreas([p.mesh])[0].symptoms.length > 0, `no symptoms for ${p.mesh}`);
+  const clue = e.getAreaInsight('head');
+  assert.ok(clue && clue.source.startsWith('https://'), 'the head clue is a NASA risk with a link');
+  const top = e.getTopRisks(14, 3);
+  assert.equal(top.length, 3);
+  assert.ok(top[0].score >= top[2].score);
+  assert.throws(() => e.addDiary('   '), Error, 'empty diary entry is rejected');
+});
+
+test('Demo color rules: 40 °C is red (degrees, not %), sleep only counts hours lost; diary writes in any month', async () => {
+  const { statusFor } = await import('../src/engine/createEngine.js');
+  assert.equal(statusFor('temperature', 40, 36.6), 'red');
+  assert.equal(statusFor('temperature', 37.2, 36.6), 'yellow');
+  assert.equal(statusFor('sleepHours', 9, 7.5), 'green', 'sleeping more is not a warning');
+  assert.equal(statusFor('heartRate', 76, 64), 'yellow');
+  const e = createEngine(data());
+  e.addDiary('First steps on Mars', 9);
+  assert.equal(e.searchDiary(9).found.at(-1).text, 'First steps on Mars');
+  assert.throws(() => e.addDiary('x', 40), RangeError);
+  e.setMonth(14); e.setMonth(4); e.setMonth(14);
+  assert.equal(e.getDiary().filter((d) => d.text.startsWith('New stage')).length, 1, 'a stage is noted only the first time');
+});
+
+test('Handled alert: extract() removes the most urgent one and the next rises to the top (max-heap)', () => {
+  const e = createEngine(data());
+  e.setMonth(14);
+  e.setBaseline({ heartRate: 64, systolic: 118, temperature: 36.6, sleepHours: 7.5 });
+  e.saveCheckin({ heartRate: 64, systolic: 118, temperature: 36.6, sleepHours: 6, mood: 1 }); // yellow sleep
+  e.assess({ symptomIds: ['chest-pain'] }); // red
+  assert.equal(e.topAlert().color, 'red');
+  e.resolveTopAlert();
+  assert.equal(e.topAlert().color, 'yellow');
+  e.resolveTopAlert();
+  assert.equal(e.topAlert(), null, 'empty heap gives null, no crash');
+  assert.equal(e.resolveTopAlert(), null);
+});
+
+test('Learn shortcut: focus is read once; months with a hazard come back sorted', () => {
+  const e = createEngine(data());
+  e.focusLearn({ hazard: 'isolation', area: 'head' });
+  assert.deepEqual(e.takeLearnFocus(), { hazard: 'isolation', area: 'head' });
+  assert.equal(e.takeLearnFocus(), null, 'second read is empty');
+  const ms = e.monthsWithHazard('isolation');
+  assert.ok(ms.length > 0 && ms.every((m, i) => i === 0 || m > ms[i - 1]));
+});
+
+test('Save and load: a refreshed page gets the same mission back (heap, queues, sorted array)', () => {
+  const e = createEngine(data());
+  e.setProfile({ name: 'Anyi', bodyType: 'female', skinTone: 'medium', suitColor: 'orange' });
+  e.setBaseline({ heartRate: 64, systolic: 118, temperature: 36.6, sleepHours: 7.5, bloodSugar: 92 });
+  e.setMonth(10);
+  e.saveCheckin({ heartRate: 90, systolic: 118, temperature: 38.5, sleepHours: 7.5, mood: 1, bloodSugar: 92 });
+  e.addDiary('Landed!', 10);
+  e.markLearned(load('lessons.json').lessons[0].id);
+  const saved = JSON.parse(JSON.stringify(e.snapshot())); // what localStorage keeps
+
+  const f = createEngine(data());
+  assert.equal(f.restore(saved), true);
+  assert.equal(f.state.month, 10);
+  assert.equal(f.getProfile().name, 'Anyi');
+  assert.equal(f.topAlert().color, 'red', 'heap rebuilt: most urgent still on top');
+  assert.deepEqual(f.getTasks(), e.getTasks(), 'queue keeps the same order');
+  assert.equal(f.searchDiary(10).found.length, e.searchDiary(10).found.length, 'binary search still works');
+  assert.deepEqual(f.getStats(), e.getStats());
+  // edge cases: nothing saved, old format, broken month
+  assert.equal(f.restore(null), false);
+  assert.equal(f.restore({ v: 0 }), false);
+  assert.throws(() => createEngine(data()).restore({ ...saved, month: 99 }), RangeError);
+});
+
+test('Mission done only on Earth with every Today task finished', () => {
+  const e = createEngine(data());
+  e.setBaseline({ heartRate: 64, systolic: 118, temperature: 36.6, sleepHours: 7.5, bloodSugar: 92 });
+  assert.equal(e.isMissionDone(), false);
+  e.setMonth(36);
+  e.saveCheckin({ heartRate: 64, systolic: 118, temperature: 36.6, sleepHours: 7.5, mood: 1, bloodSugar: 92 });
+  e.assess({ symptomIds: ['dizziness'], answers: { onset: 'Today', severity: 'Mild' } }); // balance check
+  assert.equal(e.isMissionDone(), false, 'report still waiting');
+  e.addDiary('Final report: I feel heavy but fine', 36);
+  assert.equal(e.isMissionDone(), true);
+  assert.equal(e.getEndChoice(), null);
+  e.setEndChoice('stay');
+  assert.equal(e.getEndChoice(), 'stay');
+});
+
+test('Trends example months never touch your real check-ins', () => {
+  const e = createEngine(data());
+  e.setBaseline({ heartRate: 64, systolic: 118, temperature: 36.6, sleepHours: 7.5, bloodSugar: 92 });
+  e.setMonth(36);
+  e.saveCheckin({ heartRate: 64, systolic: 118, temperature: 36.6, sleepHours: 7.5, mood: 1, bloodSugar: 92 });
+  assert.equal(e.getExampleHistory().length, 35, 'every month except the real one');
+  e.getExampleHistory();
+  assert.equal(e.getCheckins().length, 1, 'still only the one real check-in');
+  const f = createEngine(data());
+  f.restore({ ...e.snapshot(), checkins: [...e.getCheckins(), { month: 2, values: {}, status: {}, demo: true }] });
+  assert.equal(f.getCheckins().length, 1, 'old saves with demo months are cleaned on load');
+});
+
+test('Finished tasks stay finished when you move the month away and back', () => {
+  const e = createEngine(data());
+  e.setBaseline({ heartRate: 64, systolic: 118, temperature: 36.6, sleepHours: 7.5, bloodSugar: 92 });
+  e.setMonth(36);
+  const ok = { heartRate: 64, systolic: 118, temperature: 36.6, sleepHours: 7.5, mood: 1, bloodSugar: 92 };
+  e.saveCheckin(ok);
+  e.assess({ symptomIds: ['dizziness'], answers: { standing: 'Yes', onset: 'Today', severity: 'Mild' } });
+  e.addDiary('Final report', 36);
+  assert.equal(e.isMissionDone(), true);
+  e.setMonth(20); e.setMonth(36);
+  assert.equal(e.getTasks().length, 0, 'tasks of month 36 do not come back');
+  assert.equal(e.isMissionDone(), true);
+  e.saveCheckin({ ...ok, heartRate: 70 });
+  assert.equal(e.getCheckins().filter((c) => c.month === 36).length, 1, 'saving again updates the same month');
 });

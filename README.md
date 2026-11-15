@@ -48,8 +48,29 @@ npm test         # runs the data-structure and engine tests (no extra packages n
 | Stack | Screen navigation (Back) | `push`, `pop` | O(1) |
 | Sorted array | Diary by month and Learn lessons by month, binary search | `insert` O(n), `findByKey` / `upTo` O(log n + k) | O(n) space |
 
+**Save and load.** After every change the engine is saved in the browser (`localStorage`), so a page refresh keeps the mission.
+`snapshot()` turns each structure into a plain array: O(n). `restore()` rebuilds them by inserting again:
+heap and sorted array O(n log n), queues O(n).
+
 **What if we swapped them?** A plain list instead of the heap would need O(n) to find the most urgent alert each time.
 A long `if/else` instead of the tree can't be edited as data and is not a structure we can traverse or measure.
+
+## What the challenge asked for, and where it is
+
+| Challenge suggestion | In HUMAN ROVER |
+|---|---|
+| Insights for different environments | The month slider moves through 4 stages (trip to Mars, Mars base, trip home, Earth). Lessons, likely causes, tasks, music and backgrounds change with the stage |
+| Measurements and actions as part of the routine | "Today" task queue every month (check-in, exercise, diary / report, balance check) |
+| Gamification | XP, check-in streak, lessons learned, mission patches, "Mission complete" screen |
+| Dynamic charts | Trends: sleep, resting heart rate and mood over the 36 months, with your Earth baseline |
+| Color coding | Green / yellow / red in the check-in, self-check, alerts and body systems |
+| Simple instructions and explanations | Every measurement says *how* to take it; every result says what to do and links the NASA source; Laika explains each screen |
+
+## Tests
+
+`npm test` runs 27 tests (Node's built-in runner): every structure, their edge cases (empty heap, empty queue,
+month outside 1–36, empty diary entry, broken save…) and the engine rules (40 °C is red, red flags skip the tree,
+demo months are added only once, a saved mission loads back the same).
 
 ## How an assessment works
 
@@ -65,9 +86,10 @@ in month 32 → eye/brain change (SANS) questions.
 
 ## The contract (what the screens call)
 
-`engine.getStage()` · `advanceMonth()` · `saveCheckin(values)` · `getBodyAreas(meshNames)` ·
-`assess({ symptomIds, answers })` · `getAlerts()` · `nextTask()` / `completeTask()` ·
-`getOutbox()` / `sendOldestReport()` · `searchDiary(month)`
+`engine.getStage()` · `setMonth(m)` · `saveCheckin(values)` · `getBodyAreas(meshNames)` ·
+`assess({ symptomIds, answers, commit })` · `getAlerts()` / `resolveTopAlert()` · `getTasks()` / `finishTask(id)` ·
+`getOutbox()` / `sendOldestReport()` · `addDiary(text, month)` / `searchDiary(month)` · `getLessons()` / `getTopTopics()` ·
+`logExercise()` · `getStats()` · `isMissionDone()` · `snapshot()` / `restore(save)`
 
 ## Adding data
 
@@ -91,4 +113,8 @@ placeholder body with the same names.
 
 - NASA Human Research Program risk pages (linked in each data record).
 - Question format inspired by DDXPlus (Fansi Tchango et al., 2022, CC-BY 4.0). We use only its evidence format, not its diseases.
+- Women's data: NASA Technical Reports Server 20040088708 (standing up after flight). Exercise devices: NTRS 20170011470.
+- Sounds and music: see `public/media/sound/CREDITS.md` (Kenney CC0 and Pixabay Content License).
+- 3D body models: Innerscene, "Human Base Mesh with Editable 53-Bone Rig" and "Female Base Mesh 3D Person Rigged A-Pose", built from MakeHuman assets. License: CC0 (public domain). We cut them into clickable body parts in Blender.
+- Launch and Mars videos: generated with Dreamina (AI video).
 - No NASA logo is used.

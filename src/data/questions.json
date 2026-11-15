@@ -1,7 +1,8 @@
 [
-  { "id": "sudden", "text": "Did it start suddenly or little by little?", "type": "categorical", "options": ["Suddenly", "Gradually"] },
-  { "id": "vision", "text": "Is your vision different (blurry, hard to focus)?", "type": "binary", "options": ["Yes", "No"] },
-  { "id": "trigger", "text": "Did something cause it?", "type": "categorical", "options": ["A hit or fall", "Exercise", "Nothing I know"] },
-  { "id": "severity", "text": "How strong is it?", "type": "categorical", "options": ["Mild", "Moderate", "Severe"] },
-  { "id": "onset", "text": "When did it start?", "type": "categorical", "options": ["Today", "Yesterday", "Several days ago", "Ongoing from a previous check-in"] }
+  {"id": "sudden", "text": "Did it start suddenly or little by little?", "type": "categorical", "options": ["Suddenly", "Gradually"]},
+  {"id": "vision", "text": "Is your vision different (blurry, hard to focus)?", "type": "binary", "options": ["Yes", "No"]},
+  {"id": "trigger", "text": "Did something cause it?", "type": "categorical", "options": ["A hit or fall", "Exercise", "Nothing I know"]},
+  {"id": "severity", "text": "How strong is it?", "type": "categorical", "options": ["Mild", "Moderate", "Severe"]},
+  {"id": "onset", "text": "When did it start?", "type": "categorical", "options": ["Today", "Yesterday", "Several days ago", "Ongoing from a previous check-in"]},
+  {"id": "standing", "text": "Does it happen when you stand up?", "type": "binary", "options": ["Yes", "No"]}
 ]

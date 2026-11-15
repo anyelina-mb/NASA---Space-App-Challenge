@@ -1,134 +1,570 @@
 {
-  "_note": "Example records only. Fill the rest following the Symptom Data Guide. 'risks' feed the heap ranking; the tree root asks 'topCause', which the engine answers with the top risk from the heap.",
-  "symptoms": [
-    {
-      "id": "chest-pain",
-      "label": "Chest pain, fainting or shortness of breath",
-      "areas": ["chest"],
-      "redFlag": true,
-      "risks": ["cardio"],
-      "questions": [],
-      "tree": null
+ "_note": "Example records only. Fill the rest following the Symptom Data Guide. 'risks' feed the heap ranking; the tree root asks 'topCause', which the engine answers with the top risk from the heap.",
+ "symptoms": [
+  {
+   "id": "chest-pain",
+   "label": "Chest pain · urgent",
+   "areas": [
+    "chest"
+   ],
+   "redFlag": true,
+   "risks": [
+    "cardio"
+   ],
+   "questions": [],
+   "tree": null
+  },
+  {
+   "id": "headache",
+   "label": "Headache",
+   "areas": [
+    "head"
+   ],
+   "redFlag": false,
+   "risks": [
+    "vestibular",
+    "sans",
+    "sleep"
+   ],
+   "questions": [
+    "vision",
+    "sudden",
+    "severity",
+    "onset"
+   ],
+   "tree": {
+    "id": "headache-root",
+    "question": {
+     "id": "topCause",
+     "text": "Most likely cause for this mission month"
     },
-    {
-      "id": "headache",
-      "label": "Headache or trouble concentrating",
-      "areas": ["head"],
-      "redFlag": false,
-      "risks": ["vestibular", "sans", "sleep"],
-      "questions": ["vision", "sudden", "severity", "onset"],
-      "tree": {
-        "id": "headache-root",
-        "question": { "id": "topCause", "text": "Most likely cause for this mission month" },
-        "answers": {
-          "vestibular": {
-            "id": "headache-adapting",
-            "leaf": {
-              "color": "green",
-              "title": "Your body is adapting",
-              "cause": "NASA notes dizziness and coordination problems while the body adjusts to a change in gravity.",
-              "action": "Rest, move slowly and re-check next month.",
-              "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/"
-            }
-          },
-          "sleep": {
-            "id": "headache-sleep",
-            "leaf": {
-              "color": "yellow",
-              "title": "Sleep loss may be involved",
-              "cause": "NASA lists chronic sleep loss and irregular body clocks as a spaceflight risk.",
-              "action": "Protect your sleep schedule tonight and log how you slept.",
-              "source": "https://www.nasa.gov/reference/risk-from-inadequate-sleep-and-irregular-schedules/"
-            }
-          },
-          "sans": {
-            "id": "headache-vision",
-            "question": { "id": "vision", "text": "Is your vision different (blurry, hard to focus)?" },
-            "answers": {
-              "Yes": {
-                "id": "headache-vision-sudden",
-                "question": { "id": "sudden", "text": "Did it start suddenly or little by little?" },
-                "answers": {
-                  "Suddenly": {
-                    "id": "headache-sudden-vision",
-                    "leaf": {
-                      "color": "red",
-                      "title": "Sudden vision change",
-                      "cause": "Sudden vision changes need an immediate medical evaluation. NASA tracks eye and brain changes in space.",
-                      "action": "Stop precise tasks, tell the crew and contact the flight surgeons now.",
-                      "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/"
-                    }
-                  },
-                  "Gradually": {
-                    "id": "headache-sans",
-                    "leaf": {
-                      "color": "yellow",
-                      "title": "Possible eye and brain change (SANS)",
-                      "cause": "NASA reports that the structure of the eyes and brain can change with spaceflight.",
-                      "action": "Tell the crew and include it in your next report to Earth.",
-                      "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/"
-                    }
-                  }
-                }
-              },
-              "No": {
-                "id": "headache-watch",
-                "leaf": {
-                  "color": "yellow",
-                  "title": "Keep watching",
-                  "cause": "Headache without vision changes; NASA monitors eye and brain changes on long missions.",
-                  "action": "Repeat your check-in and tell the crew if it continues.",
-                  "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/"
-                }
-              }
-            }
-          }
-        }
+    "answers": {
+     "vestibular": {
+      "id": "headache-adapting",
+      "leaf": {
+       "color": "green",
+       "title": "Your body is adapting",
+       "cause": "NASA notes dizziness and coordination problems while the body adjusts to a change in gravity.",
+       "action": "Rest, move slowly and re-check next month.",
+       "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/"
       }
-    },
-    {
-      "id": "limb-pain",
-      "label": "Pain in an arm, forearm or leg",
-      "areas": ["arm", "forearm", "thigh", "shin", "knee"],
-      "redFlag": false,
-      "risks": ["musculoskeletal"],
-      "questions": ["trigger", "severity", "onset"],
-      "tree": {
-        "id": "limb-root",
-        "question": { "id": "trigger", "text": "Did something cause it?" },
-        "answers": {
-          "A hit or fall": {
-            "id": "limb-fracture",
-            "leaf": {
-              "color": "red",
-              "title": "Possible fracture",
-              "cause": "NASA explains that without gravity bones break down and become more brittle, so breaks are more likely.",
-              "action": "Stop using the limb, tell the crew and send a report to the flight surgeons.",
-              "source": "https://www.nasa.gov/reference/risk-of-spaceflight-induced-bone-changes/"
-            }
-          },
-          "Exercise": {
-            "id": "limb-exercise",
-            "leaf": {
-              "color": "green",
-              "title": "Linked to your exercise session",
-              "cause": "All astronauts exercise to counteract losses in bone, muscle and heart performance, says NASA.",
-              "action": "Rest the area, log it, and keep your next session lighter.",
-              "source": "https://www.nasa.gov/reference/risk-of-reduced-cardiorespiratory-and-musculoskeletal-fitness/"
-            }
-          },
-          "Nothing I know": {
-            "id": "limb-loss",
-            "leaf": {
-              "color": "yellow",
-              "title": "Possible muscle or bone change",
-              "cause": "NASA reports bone and muscle loss during spaceflight.",
-              "action": "Tell the crew and do today's exercise session carefully.",
-              "source": "https://www.nasa.gov/reference/risk-of-spaceflight-induced-bone-changes/"
-            }
-          }
-        }
+     },
+     "sleep": {
+      "id": "headache-sleep",
+      "leaf": {
+       "color": "yellow",
+       "title": "Sleep loss may be involved",
+       "cause": "NASA lists chronic sleep loss and irregular body clocks as a spaceflight risk.",
+       "action": "Protect your sleep schedule tonight and log how you slept.",
+       "source": "https://www.nasa.gov/reference/risk-from-inadequate-sleep-and-irregular-schedules/"
       }
+     },
+     "sans": {
+      "id": "headache-vision",
+      "question": {
+       "id": "vision",
+       "text": "Is your vision different (blurry, hard to focus)?"
+      },
+      "answers": {
+       "Yes": {
+        "id": "headache-vision-sudden",
+        "question": {
+         "id": "sudden",
+         "text": "Did it start suddenly or little by little?"
+        },
+        "answers": {
+         "Suddenly": {
+          "id": "headache-sudden-vision",
+          "leaf": {
+           "color": "red",
+           "title": "Sudden vision change",
+           "cause": "Sudden vision changes need an immediate medical evaluation. NASA tracks eye and brain changes in space.",
+           "action": "Stop precise tasks, tell the crew and contact the flight surgeons now.",
+           "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/"
+          }
+         },
+         "Gradually": {
+          "id": "headache-sans",
+          "leaf": {
+           "color": "yellow",
+           "title": "Possible eye and brain change (SANS)",
+           "cause": "NASA reports that the structure of the eyes and brain can change with spaceflight.",
+           "action": "Tell the crew and include it in your next report to Earth.",
+           "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/"
+          }
+         }
+        }
+       },
+       "No": {
+        "id": "headache-watch",
+        "leaf": {
+         "color": "yellow",
+         "title": "Keep watching",
+         "cause": "Headache without vision changes; NASA monitors eye and brain changes on long missions.",
+         "action": "Repeat your check-in and tell the crew if it continues.",
+         "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/"
+        }
+       }
+      }
+     }
     }
-  ]
+   }
+  },
+  {
+   "id": "blurry-vision",
+   "label": "Blurry vision",
+   "areas": [
+    "head"
+   ],
+   "redFlag": false,
+   "risks": [
+    "sans"
+   ],
+   "questions": [
+    "sudden",
+    "severity"
+   ],
+   "tree": {
+    "id": "vision-root",
+    "question": {
+     "id": "sudden",
+     "text": "Did it start suddenly or little by little?"
+    },
+    "answers": {
+     "Suddenly": {
+      "id": "vision-sudden",
+      "leaf": {
+       "color": "red",
+       "title": "Sudden vision change",
+       "cause": "Sudden vision changes need an immediate medical evaluation. NASA tracks eye and brain changes in space.",
+       "action": "Stop precise tasks, tell the crew and contact the flight surgeons now.",
+       "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/"
+      }
+     },
+     "Gradually": {
+      "id": "vision-gradual",
+      "leaf": {
+       "color": "yellow",
+       "title": "Possible eye and brain change (SANS)",
+       "cause": "NASA reports that the structure of the eyes and brain can change on long missions.",
+       "action": "Tell the crew and add it to your next report to Earth.",
+       "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "dizziness",
+   "label": "Dizziness",
+   "areas": [
+    "head"
+   ],
+   "redFlag": false,
+   "risks": [
+    "vestibular",
+    "cardio"
+   ],
+   "questions": [
+    "standing",
+    "severity",
+    "onset"
+   ],
+   "tree": {
+    "id": "dizzy-root",
+    "question": {
+     "id": "topCause",
+     "text": "Most likely cause for this mission month"
+    },
+    "answers": {
+     "vestibular": {
+      "id": "dizzy-balance",
+      "leaf": {
+       "color": "green",
+       "title": "Your balance is adapting",
+       "cause": "NASA notes dizziness and coordination problems while the body adjusts to a change in gravity.",
+       "action": "Move slowly, hold on to something when you turn, and check again tomorrow.",
+       "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/"
+      }
+     },
+     "cardio": {
+      "id": "dizzy-standing",
+      "question": {
+       "id": "standing",
+       "text": "Does it happen when you stand up?"
+      },
+      "answers": {
+       "Yes": {
+        "id": "dizzy-bp",
+        "leaf": {
+         "color": "yellow",
+         "title": "Possible heart and blood vessel change",
+         "cause": "NASA studies how the heart and blood vessels adapt when gravity changes.",
+         "action": "Stand up slowly, drink water, measure your heart rate and blood pressure, and tell the crew.",
+         "source": "https://www.nasa.gov/reference/risk-of-cardiovascular-adaptations/"
+        }
+       },
+       "No": {
+        "id": "dizzy-other",
+        "leaf": {
+         "color": "green",
+         "title": "Your balance is adapting",
+         "cause": "NASA notes dizziness and coordination problems while the body adjusts to a change in gravity.",
+         "action": "Move slowly and check again tomorrow.",
+         "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "pain",
+   "label": "Pain",
+   "areas": [
+    "neck",
+    "shoulder",
+    "arm",
+    "forearm",
+    "hand",
+    "upper-back",
+    "lower-back",
+    "pelvis",
+    "thigh",
+    "knee",
+    "shin",
+    "foot"
+   ],
+   "redFlag": false,
+   "risks": [
+    "musculoskeletal",
+    "injury"
+   ],
+   "questions": [
+    "trigger",
+    "severity",
+    "onset"
+   ],
+   "tree": {
+    "id": "pain-0",
+    "question": {
+     "id": "trigger",
+     "text": "Did something cause it?"
+    },
+    "answers": {
+     "A hit or fall": {
+      "id": "pain-1",
+      "leaf": {
+       "color": "yellow",
+       "title": "Possible injury",
+       "cause": "NASA studies injuries from bumps, landings and hard work in a suit.",
+       "action": "Stop that activity, put ice or rest it, and tell the crew medical officer.",
+       "source": "https://www.nasa.gov/reference/risk-of-injury-from-dynamic-loads/"
+      }
+     },
+     "Exercise": {
+      "id": "pain-2",
+      "leaf": {
+       "color": "green",
+       "title": "Sore from exercise",
+       "cause": "Daily exercise protects bones and muscles in low gravity, so some soreness is normal.",
+       "action": "Stretch, drink water and check again tomorrow.",
+       "source": "https://www.nasa.gov/reference/risk-of-reduced-cardiorespiratory-and-musculoskeletal-fitness/"
+      }
+     },
+     "Nothing I know": {
+      "id": "pain-3",
+      "leaf": {
+       "color": "yellow",
+       "title": "Keep an eye on it",
+       "cause": "NASA explains bones and muscles weaken when they carry less weight.",
+       "action": "Log your exercise, tell the crew and check again tomorrow.",
+       "source": "https://www.nasa.gov/reference/risk-of-spaceflight-induced-bone-changes/"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "swelling",
+   "label": "Swelling",
+   "areas": [
+    "neck",
+    "shoulder",
+    "arm",
+    "forearm",
+    "hand",
+    "upper-back",
+    "lower-back",
+    "pelvis",
+    "thigh",
+    "knee",
+    "shin",
+    "foot"
+   ],
+   "redFlag": false,
+   "risks": [
+    "injury"
+   ],
+   "questions": [
+    "trigger",
+    "severity"
+   ],
+   "tree": {
+    "id": "swell-0",
+    "question": {
+     "id": "trigger",
+     "text": "Did something cause it?"
+    },
+    "answers": {
+     "A hit or fall": {
+      "id": "swell-1",
+      "leaf": {
+       "color": "yellow",
+       "title": "Possible injury",
+       "cause": "NASA studies injuries from bumps, landings and hard work in a suit.",
+       "action": "Stop that activity, put ice or rest it, and tell the crew medical officer.",
+       "source": "https://www.nasa.gov/reference/risk-of-injury-from-dynamic-loads/"
+      }
+     },
+     "Exercise": {
+      "id": "swell-2",
+      "leaf": {
+       "color": "green",
+       "title": "Sore from exercise",
+       "cause": "Daily exercise protects bones and muscles in low gravity, so some soreness is normal.",
+       "action": "Stretch, drink water and check again tomorrow.",
+       "source": "https://www.nasa.gov/reference/risk-of-reduced-cardiorespiratory-and-musculoskeletal-fitness/"
+      }
+     },
+     "Nothing I know": {
+      "id": "swell-3",
+      "leaf": {
+       "color": "yellow",
+       "title": "Swelling to check",
+       "cause": "Swelling without a clear cause is worth a look by the crew medical officer.",
+       "action": "Rest it, keep it up and tell the crew.",
+       "source": "https://www.nasa.gov/reference/risk-of-injury-from-dynamic-loads/"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "weakness",
+   "label": "Loss of strength",
+   "areas": [
+    "neck",
+    "shoulder",
+    "arm",
+    "forearm",
+    "hand",
+    "upper-back",
+    "lower-back",
+    "pelvis",
+    "thigh",
+    "knee",
+    "shin",
+    "foot"
+   ],
+   "redFlag": false,
+   "risks": [
+    "musculoskeletal"
+   ],
+   "questions": [
+    "onset",
+    "severity"
+   ],
+   "tree": {
+    "question": {
+     "id": "topCause",
+     "text": "Most likely cause for this mission month"
+    },
+    "answers": {
+     "musculoskeletal": {
+      "leaf": {
+       "color": "yellow",
+       "title": "Muscles and bones losing strength",
+       "cause": "NASA explains that when legs don't carry the body's weight, bones and muscles weaken.",
+       "action": "Log your exercise every day and tell the crew if it gets worse.",
+       "source": "https://www.nasa.gov/reference/risk-of-spaceflight-induced-bone-changes/"
+      },
+      "id": "weak-1"
+     }
+    },
+    "id": "weak-0"
+   }
+  },
+  {
+   "id": "short-breath",
+   "label": "Shortness of breath · urgent",
+   "areas": [
+    "chest"
+   ],
+   "redFlag": true,
+   "risks": [
+    "cardio"
+   ],
+   "questions": [],
+   "tree": null
+  },
+  {
+   "id": "racing-heart",
+   "label": "Racing heart",
+   "areas": [
+    "chest"
+   ],
+   "redFlag": false,
+   "risks": [
+    "cardio"
+   ],
+   "questions": [
+    "standing",
+    "severity"
+   ],
+   "tree": {
+    "question": {
+     "id": "standing",
+     "text": "Does it happen when you stand up?"
+    },
+    "answers": {
+     "Yes": {
+      "leaf": {
+       "color": "yellow",
+       "title": "Heart and blood vessels adapting",
+       "cause": "NASA studies how the heart and blood vessels adapt when gravity changes.",
+       "action": "Stand up slowly, drink water, measure your heart rate and tell the crew.",
+       "source": "https://www.nasa.gov/reference/risk-of-cardiovascular-adaptations/"
+      },
+      "id": "heart-1"
+     },
+     "No": {
+      "leaf": {
+       "color": "yellow",
+       "title": "Measure and tell the crew",
+       "cause": "A racing heart at rest is worth measuring and reporting.",
+       "action": "Sit down, measure your heart rate in your check-in and tell the crew.",
+       "source": "https://www.nasa.gov/reference/risk-of-cardiovascular-adaptations/"
+      },
+      "id": "heart-2"
+     }
+    },
+    "id": "heart-0"
+   }
+  },
+  {
+   "id": "stomach",
+   "label": "Nausea or stomach ache",
+   "areas": [
+    "abdomen"
+   ],
+   "redFlag": false,
+   "risks": [
+    "vestibular",
+    "nutrition"
+   ],
+   "questions": [
+    "onset",
+    "severity"
+   ],
+   "tree": {
+    "question": {
+     "id": "topCause",
+     "text": "Most likely cause for this mission month"
+    },
+    "answers": {
+     "vestibular": {
+      "leaf": {
+       "color": "green",
+       "title": "Your body is adapting",
+       "cause": "NASA notes motion sickness and dizziness while the body adapts to a change in gravity.",
+       "action": "Move slowly, eat light and check again tomorrow.",
+       "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/"
+      },
+      "id": "stomach-1"
+     },
+     "nutrition": {
+      "leaf": {
+       "color": "yellow",
+       "title": "Check what you eat and drink",
+       "cause": "NASA lists food and nutrition as a risk on long missions.",
+       "action": "Drink water, eat your planned meals and tell the crew if it continues.",
+       "source": "https://www.nasa.gov/reference/risk-of-inadequate-food-and-nutrition/"
+      },
+      "id": "stomach-2"
+     }
+    },
+    "id": "stomach-0"
+   }
+  },
+  {
+   "id": "low-mood",
+   "label": "Feeling low or stressed",
+   "areas": [
+    "head"
+   ],
+   "redFlag": false,
+   "risks": [
+    "behavioral"
+   ],
+   "questions": [
+    "onset",
+    "severity"
+   ],
+   "tree": {
+    "question": {
+     "id": "topCause",
+     "text": "Most likely cause for this mission month"
+    },
+    "answers": {
+     "behavioral": {
+      "leaf": {
+       "color": "yellow",
+       "title": "Talk to someone today",
+       "cause": "NASA says isolation and confinement can affect mood, so crews are trained and supported.",
+       "action": "Talk to a crewmate, write in your diary and tell the crew medical officer.",
+       "source": "https://www.nasa.gov/reference/risk-of-behavioral-conditions-and-psychiatric-disorders/"
+      },
+      "id": "mood-1"
+     }
+    },
+    "id": "mood-0"
+   }
+  },
+  {
+   "id": "bad-sleep",
+   "label": "Trouble sleeping",
+   "areas": [
+    "head"
+   ],
+   "redFlag": false,
+   "risks": [
+    "sleep"
+   ],
+   "questions": [
+    "onset",
+    "severity"
+   ],
+   "tree": {
+    "question": {
+     "id": "topCause",
+     "text": "Most likely cause for this mission month"
+    },
+    "answers": {
+     "sleep": {
+      "leaf": {
+       "color": "yellow",
+       "title": "Protect your sleep",
+       "cause": "NASA lists sleep loss and irregular schedules as a spaceflight risk.",
+       "action": "Same lights-off time every night, dim lights before bed, log your sleep.",
+       "source": "https://www.nasa.gov/reference/risk-from-inadequate-sleep-and-irregular-schedules/"
+      },
+      "id": "sleep-1"
+     }
+    },
+    "id": "sleep-0"
+   }
+  }
+ ]
 }

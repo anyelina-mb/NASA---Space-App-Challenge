@@ -1,59 +1,230 @@
 {
-  "_note": "Stage weights are our design model (Low=1, Medium=2, High=3) based on the stage descriptions in our research doc. They are NOT NASA probabilities. 'grows' adds +1 after the middle of that stage. 'transitionBoost' sets weight 3 in the months right after a gravity change.",
-  "transitionMonths": [1, 2, 9, 10, 28, 29, 36],
-  "risks": [
-    {
-      "id": "vestibular",
-      "name": "Balance and motion sickness",
-      "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/",
-      "weights": { "first": 3, "journey": 1, "mars": 1, "return": 1, "earth": 3 },
-      "transitionBoost": true,
-      "severity": 1
-    },
-    {
-      "id": "sans",
-      "name": "Eye and brain changes (SANS)",
-      "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/",
-      "weights": { "first": 2, "journey": 2, "mars": 2, "return": 3, "earth": 2 },
-      "grows": ["journey"],
-      "severity": 3
-    },
-    {
-      "id": "musculoskeletal",
-      "name": "Bone and muscle loss",
-      "source": "https://www.nasa.gov/reference/risk-of-spaceflight-induced-bone-changes/",
-      "weights": { "first": 1, "journey": 2, "mars": 2, "return": 3, "earth": 3 },
-      "grows": ["journey"],
-      "severity": 2
-    },
-    {
-      "id": "cardio",
-      "name": "Heart and blood pressure",
-      "source": "https://www.nasa.gov/reference/risk-of-cardiovascular-adaptations/",
-      "weights": { "first": 2, "journey": 2, "mars": 2, "return": 2, "earth": 3 },
-      "severity": 3
-    },
-    {
-      "id": "sleep",
-      "name": "Sleep and body clock",
-      "source": "https://www.nasa.gov/reference/risk-from-inadequate-sleep-and-irregular-schedules/",
-      "weights": { "first": 3, "journey": 2, "mars": 2, "return": 2, "earth": 2 },
-      "severity": 1
-    },
-    {
-      "id": "behavioral",
-      "name": "Mind and isolation",
-      "source": "https://www.nasa.gov/reference/risk-of-behavioral-conditions-and-psychiatric-disorders/",
-      "weights": { "first": 1, "journey": 2, "mars": 3, "return": 2, "earth": 2 },
-      "grows": ["journey"],
-      "severity": 2
-    },
-    {
-      "id": "immune",
-      "name": "Immune response",
-      "source": "https://www.nasa.gov/reference/risk-of-altered-immune-system-responses/",
-      "weights": { "first": 2, "journey": 2, "mars": 2, "return": 2, "earth": 2 },
-      "severity": 2
-    }
-  ]
+ "_note": "Stage weights are our design model (Low=1, Medium=2, High=3) based on the stage descriptions in our research doc. They are NOT NASA probabilities. 'grows' adds +1 after the middle of that stage. 'transitionBoost' sets weight 3 in the months right after a gravity change.",
+ "transitionMonths": [
+  1,
+  2,
+  9,
+  10,
+  28,
+  29,
+  36
+ ],
+ "risks": [
+  {
+   "id": "vestibular",
+   "name": "Balance and motion sickness",
+   "source": "https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/",
+   "weights": {
+    "first": 3,
+    "journey": 1,
+    "mars": 1,
+    "return": 1,
+    "earth": 3
+   },
+   "transitionBoost": true,
+   "severity": 1,
+   "hazard": "Gravity fields",
+   "why": "Your inner ear uses gravity to sense balance",
+   "explain": "Every time gravity changes (floating in space, landing on Mars, coming home), NASA notes dizziness and coordination problems while the brain and inner ear adapt.",
+   "research": [
+    [
+     "Standard Measures",
+     "https://www.nasa.gov/reference/standard-measures/"
+    ]
+   ]
+  },
+  {
+   "id": "sans",
+   "name": "Eye and brain changes (SANS)",
+   "source": "https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/",
+   "weights": {
+    "first": 2,
+    "journey": 2,
+    "mars": 2,
+    "return": 3,
+    "earth": 2
+   },
+   "grows": [
+    "journey"
+   ],
+   "severity": 3,
+   "hazard": "Gravity fields",
+   "why": "Without gravity, fluids move toward your head",
+   "explain": "In weightlessness, blood and spinal fluid shift up. NASA links this to SANS: changes in the eyes and brain, its leading spaceflight health risk. Longer missions raise the risk.",
+   "research": [
+    [
+     "B-Complex",
+     "https://www.nasa.gov/reference/b-complex/"
+    ],
+    [
+     "Thigh Cuff",
+     "https://www.nasa.gov/reference/thigh-cuff/"
+    ],
+    [
+     "Brain Fluid Pressure",
+     "https://www.nasa.gov/reference/brain-fluid-pressure/"
+    ]
+   ]
+  },
+  {
+   "id": "musculoskeletal",
+   "name": "Bone and muscle loss",
+   "source": "https://www.nasa.gov/reference/risk-of-spaceflight-induced-bone-changes/",
+   "weights": {
+    "first": 1,
+    "journey": 2,
+    "mars": 2,
+    "return": 3,
+    "earth": 3
+   },
+   "grows": [
+    "journey"
+   ],
+   "severity": 2,
+   "hazard": "Gravity fields",
+   "why": "Less weight on your body means less work for bones and muscles",
+   "explain": "NASA explains that when the legs don't carry the body's weight, bones and muscles weaken. That's why crews exercise every day.",
+   "research": [
+    [
+     "Zero T2",
+     "https://www.nasa.gov/reference/zero-t2/"
+    ]
+   ]
+  },
+  {
+   "id": "cardio",
+   "name": "Heart and blood pressure",
+   "source": "https://www.nasa.gov/reference/risk-of-cardiovascular-adaptations/",
+   "weights": {
+    "first": 2,
+    "journey": 2,
+    "mars": 2,
+    "return": 2,
+    "earth": 3
+   },
+   "severity": 3,
+   "hazard": "Gravity fields",
+   "why": "Your heart is used to pumping against Earth's gravity",
+   "explain": "NASA studies how the heart and blood vessels adapt when gravity changes, in space, on Mars and back on Earth.",
+   "research": [
+    [
+     "Standard Measures",
+     "https://www.nasa.gov/reference/standard-measures/"
+    ]
+   ]
+  },
+  {
+   "id": "sleep",
+   "name": "Sleep and body clock",
+   "source": "https://www.nasa.gov/reference/risk-from-inadequate-sleep-and-irregular-schedules/",
+   "weights": {
+    "first": 3,
+    "journey": 2,
+    "mars": 2,
+    "return": 2,
+    "earth": 2
+   },
+   "severity": 1,
+   "hazard": null,
+   "why": "Light, schedules and a different day length confuse your body clock",
+   "explain": "NASA lists inadequate sleep and irregular schedules as a spaceflight risk. A day on Mars lasts 24 h 39 min.",
+   "research": [
+    [
+     "ARCHeR",
+     "https://www.nasa.gov/reference/archer/"
+    ]
+   ]
+  },
+  {
+   "id": "behavioral",
+   "name": "Mood and behavior",
+   "source": "https://www.nasa.gov/reference/risk-of-behavioral-conditions-and-psychiatric-disorders/",
+   "weights": {
+    "first": 1,
+    "journey": 2,
+    "mars": 3,
+    "return": 2,
+    "earth": 2
+   },
+   "grows": [
+    "journey"
+   ],
+   "severity": 2,
+   "hazard": "Isolation and confinement",
+   "why": "Months in a small space with the same few people",
+   "explain": "NASA says long missions can affect mood and behavior, so crews must be carefully chosen, trained and supported.",
+   "research": [
+    [
+     "ARCHeR",
+     "https://www.nasa.gov/reference/archer/"
+    ]
+   ]
+  },
+  {
+   "id": "immune",
+   "name": "Immune response",
+   "source": "https://www.nasa.gov/reference/risk-of-altered-immune-system-responses/",
+   "weights": {
+    "first": 2,
+    "journey": 2,
+    "mars": 2,
+    "return": 2,
+    "earth": 2
+   },
+   "severity": 2,
+   "hazard": "Hostile, closed environment",
+   "why": "A closed habitat shares the same air and microbes",
+   "explain": "NASA studies how spaceflight changes immune responses, and monitors microbes inside the spacecraft.",
+   "research": [
+    [
+     "Standard Measures",
+     "https://www.nasa.gov/reference/standard-measures/"
+    ]
+   ]
+  },
+  {
+   "id": "injury",
+   "name": "Injury from bumps and loads",
+   "source": "https://www.nasa.gov/reference/risk-of-injury-from-dynamic-loads/",
+   "weights": {
+    "first": 2,
+    "journey": 1,
+    "mars": 2,
+    "return": 1,
+    "earth": 2
+   },
+   "severity": 2,
+   "hazard": "Gravity fields",
+   "why": "Landing, bumps and heavy work can injure the body",
+   "explain": "NASA studies injuries from dynamic loads, like the forces during launch and landing, and from hard work in a suit.",
+   "research": [
+    [
+     "Occupant Protection",
+     "https://www.nasa.gov/hrp/ongoing-hrp-research/"
+    ]
+   ]
+  },
+  {
+   "id": "nutrition",
+   "name": "Food and nutrition",
+   "source": "https://www.nasa.gov/reference/risk-of-inadequate-food-and-nutrition/",
+   "weights": {
+    "first": 1,
+    "journey": 2,
+    "mars": 2,
+    "return": 2,
+    "earth": 1
+   },
+   "severity": 1,
+   "hazard": "Distance from Earth",
+   "why": "All the food for years has to travel with you",
+   "explain": "NASA lists inadequate food and nutrition as a spaceflight risk: food must stay healthy and tasty for years, far from Earth.",
+   "research": [
+    [
+     "Food Physiology",
+     "https://www.nasa.gov/hrp/ongoing-hrp-research/"
+    ]
+   ]
+  }
+ ]
 }
