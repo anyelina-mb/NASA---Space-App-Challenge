@@ -142,4 +142,46 @@ placeholder body with the same names.
 - Sounds and music: see `public/media/sound/CREDITS.md` (Kenney CC0 and Pixabay Content License).
 - 3D body models: Innerscene, "Human Base Mesh with Editable 53-Bone Rig" and "Female Base Mesh 3D Person Rigged A-Pose", built from MakeHuman assets. License: CC0 (public domain). We cut them into clickable body parts in Blender.
 - Launch and Mars videos: generated with Dreamina (AI video).
+- **AI assistance:** we used **Claude (Opus 5.5)** and **ChatGPT** to help us write and review code and to create images.
+  The idea, design decisions and the check of every fact against its NASA / CSA source are our own.
 - No NASA logo is used.
+
+## Resources
+
+Every lesson and result in the app links to its source. These are all the pages we used.
+
+**NASA Human Research Program (HRP)**
+- [The 5 Hazards of Human Spaceflight](https://www.nasa.gov/hrp/hazards/)
+- [Human Research Program risks](https://www.nasa.gov/hrp/risks/)
+- [Ongoing HRP research](https://www.nasa.gov/hrp/ongoing-hrp-research/)
+
+**NASA risk pages**
+- [Altered sensorimotor and vestibular function (balance)](https://www.nasa.gov/reference/risk-of-altered-sensorimotor-and-vestibular-function/)
+- [Spaceflight-associated neuro-ocular syndrome (SANS)](https://www.nasa.gov/reference/risk-of-spaceflight-associated-neuro-ocular-syndrome-sans/)
+- [Spaceflight-induced bone changes](https://www.nasa.gov/reference/risk-of-spaceflight-induced-bone-changes/)
+- [Reduced cardiorespiratory and musculoskeletal fitness](https://www.nasa.gov/reference/risk-of-reduced-cardiorespiratory-and-musculoskeletal-fitness/)
+- [Cardiovascular adaptations](https://www.nasa.gov/reference/risk-of-cardiovascular-adaptations/)
+- [Inadequate sleep and irregular schedules](https://www.nasa.gov/reference/risk-from-inadequate-sleep-and-irregular-schedules/)
+- [Behavioral conditions and psychiatric disorders](https://www.nasa.gov/reference/risk-of-behavioral-conditions-and-psychiatric-disorders/)
+- [Altered immune system responses](https://www.nasa.gov/reference/risk-of-altered-immune-system-responses/)
+- [Injury from dynamic loads](https://www.nasa.gov/reference/risk-of-injury-from-dynamic-loads/)
+- [Inadequate food and nutrition](https://www.nasa.gov/reference/risk-of-inadequate-food-and-nutrition/)
+- [Radiation-induced cancers](https://www.nasa.gov/reference/risk-of-radiation-induced-cancers)
+- [Celestial dust exposure](https://www.nasa.gov/directorates/esdmd/hhp/risk-of-adverse-health-performance-effects-of-celestial-dust-exposure)
+
+**NASA research studies (shown as "Research now" in the app)**
+- [ARCHeR](https://www.nasa.gov/reference/archer/) · [B Complex](https://www.nasa.gov/reference/b-complex/) · [Brain Fluid Pressure](https://www.nasa.gov/reference/brain-fluid-pressure/) · [Standard Measures](https://www.nasa.gov/reference/standard-measures/) · [Thigh Cuff](https://www.nasa.gov/reference/thigh-cuff/) · [Zero T2](https://www.nasa.gov/reference/zero-t2/)
+
+**NASA Technical Reports Server (NTRS) and JPL**
+- [Communication delays, disruptions and blackouts for crewed Mars missions (ASCEND)](https://ntrs.nasa.gov/api/citations/20220013418/downloads/ASCEND-Communication%20Delays%2C%20Disruptions%2C%20and%20Blackouts%20for%20Crewed%20Mars%20Missions.pdf), the 0 to 22 minute delay
+- [Review of women and men astronauts' health after spaceflight (NTRS 20040088708)](https://ntrs.nasa.gov/citations/20040088708)
+- [ISS exercise hardware (NTRS 20170011470)](https://ntrs.nasa.gov/api/citations/20170011470/downloads/20170011470.pdf)
+- [Mars at a Glance (NASA JPL)](https://www.jpl.nasa.gov/news/press_kits/insight/launch/facts/mars-at-a-glance), 38% gravity and a 24 h 39 min day
+
+**Canadian Space Agency (CSA)**
+- [Monitoring radiation for astronaut health](https://www.asc-csa.gc.ca/eng/news/articles/2026/2026-02-26-monitoring-radiation-astronaut-health.asp)
+- [Why do we do science in space?](https://www.asc-csa.gc.ca/eng/iss/science/why-do-we-conduct-science-experiments-in-space.asp)
+
+**Assets**
+- 3D bodies: [Innerscene, male base mesh](https://www.innerscene.com/tools/library/3d-parts/human-base-mesh-with-editable-53-bone-rig-8e7c8ab1) and [female base mesh](https://www.innerscene.com/tools/library/3d-parts/female-base-mesh-3d-person-rigged-a-pose-dba97ed5) (CC0)
+- Sounds and music: [`public/media/sound/CREDITS.md`](public/media/sound/CREDITS.md)
