@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "HUMAN ROVER: an educational experience about what living on Mars does to the human body, with astronaut self-check practice (NASA Space Apps 2026)",
+  "description": "HUMAN ROVER - NASA Space Apps 2026 health monitoring simulation for astronauts on a mission to Mars.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -20,5 +20,10 @@
   "devDependencies": {
     "@vitejs/plugin-react": "4.3.3",
     "vite": "5.4.10"
+  },
+  "aiAssistance": {
+    "code": "Written with help from Claude (Anthropic, Opus 5.5) and ChatGPT (OpenAI); reviewed and tested by the team.",
+    "images": "Laika, astronaut avatars and backgrounds generated with ChatGPT; marked 'AI-generated' in each file.",
+    "video": "Launch and Mars videos generated with Dreamina; marked 'AI-generated video' in each file."
   }
 }

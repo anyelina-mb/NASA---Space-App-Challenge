@@ -825,3 +825,6 @@ fieldset { border: 1px solid #dde3ee; border-radius: 10px; margin: 10px 0; }
 .ci-why a { color: #3fd0ff; text-decoration: none; font-weight: 600; }
 .ci-row { padding: 5px 0 !important; grid-template-columns: 2fr 1.3fr .6fr .5fr !important; }
 .ci-table { top: 192px !important; padding: 10px 24px !important; }
+
+/* Space Apps: visible notice that the images and videos are AI-generated */
+.ai-note { position: fixed; right: 10px; bottom: 6px; z-index: 60; margin: 0; padding: 3px 10px; border-radius: 999px; background: rgba(5,8,20,.72); border: 1px solid rgba(255,255,255,.25); color: #e6edf9; font: 600 11px Inter, sans-serif; pointer-events: none; }

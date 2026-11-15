@@ -25,6 +25,8 @@ export default function Stage({ background, className = '', children }) {
   return (
     <div className={`stage-outer ${className}`} style={background ? { backgroundImage: `url(${background})` } : undefined}>
       <div className="stage-shade" aria-hidden="true" />
+      {/* Space Apps rule: AI-generated images and videos must say so where people can see it */}
+      <p className="ai-note">Images and videos: AI-generated (ChatGPT, Dreamina)</p>
       <div className="stage" style={{ width: w, height: H, transform: `translate(-50%, -50%) scale(${scale})` }}>
         {children}
       </div>
